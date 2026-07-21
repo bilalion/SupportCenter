@@ -1,0 +1,17 @@
+# Maven
+target/
+*.class
+# NetBeans
+nbproject/private/
+build/
+dist/
+.nb-gradle/
+# Logs
+*.log
+# macOS
+.DS_Store
+
+# Database
+*.db
+*.sqlite
+
