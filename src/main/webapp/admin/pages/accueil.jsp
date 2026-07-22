@@ -2,87 +2,276 @@
 <%@page import="config.LanguageManager"%>
 
 
+<!-- ==========================
+     DASHBOARD HEADER
+     ========================== -->
+
 <div class="dashboard-header">
 
+
     <h1>
+
         <%= LanguageManager.get("dashboard.main.title", session) %>
+
     </h1>
 
+
+
     <p>
+
         <%= LanguageManager.get("dashboard.card.text", session) %>
+
     </p>
 
+
 </div>
+
+
+
+
+
+
+
+<!-- ==========================
+     STATISTICS GRID
+     ========================== -->
 
 
 <div class="stats-container">
 
 
-    <div class="card">
 
-        <h3>
-            <%= LanguageManager.get("dashboard.total.centers", session) %>
-        </h3>
+    <!-- ==========================
+         TOTAL CENTERS
+         ========================== -->
 
-        <p>
-            0
-        </p>
+
+    <div class="card dashboard-card blue-card">
+
+
+        <div class="card-icon">
+
+            🏢
+
+        </div>
+
+
+
+        <div class="card-info">
+
+
+            <h3>
+
+                <%= LanguageManager.get("dashboard.total.centers", session) %>
+
+            </h3>
+
+
+
+            <strong>
+
+                0
+
+            </strong>
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+
+
+    <!-- ==========================
+         ACTIVE CENTERS
+         ========================== -->
+
+
+    <div class="card dashboard-card green-card">
+
+
+        <div class="card-icon">
+
+            ✅
+
+        </div>
+
+
+
+        <div class="card-info">
+
+
+            <h3>
+
+                <%= LanguageManager.get("dashboard.active.centers", session) %>
+
+            </h3>
+
+
+
+            <strong>
+
+                0
+
+            </strong>
+
+
+        </div>
+
+
 
     </div>
 
 
-    <div class="card">
 
-        <h3>
-            <%= LanguageManager.get("dashboard.active.centers", session) %>
-        </h3>
 
-        <p>
-            0
-        </p>
+
+
+
+
+    <!-- ==========================
+         SUBSCRIPTIONS
+         ========================== -->
+
+
+    <div class="card dashboard-card orange-card">
+
+
+        <div class="card-icon">
+
+            📅
+
+        </div>
+
+
+
+        <div class="card-info">
+
+
+            <h3>
+
+                <%= LanguageManager.get("dashboard.total.subscriptions", session) %>
+
+            </h3>
+
+
+
+            <strong>
+
+                0
+
+            </strong>
+
+
+        </div>
+
+
 
     </div>
 
 
-    <div class="card">
 
-        <h3>
-            <%= LanguageManager.get("dashboard.total.subscriptions", session) %>
-        </h3>
 
-        <p>
-            0
-        </p>
+
+
+
+
+    <!-- ==========================
+         REVENUE
+         ========================== -->
+
+
+    <div class="card dashboard-card purple-card">
+
+
+        <div class="card-icon">
+
+            💰
+
+        </div>
+
+
+
+        <div class="card-info">
+
+
+            <h3>
+
+                <%= LanguageManager.get("dashboard.total.revenue", session) %>
+
+            </h3>
+
+
+
+            <strong>
+
+                0 MAD
+
+            </strong>
+
+
+        </div>
+
+
 
     </div>
 
 
-    <div class="card">
 
-        <h3>
-            <%= LanguageManager.get("dashboard.total.revenue", session) %>
-        </h3>
-
-        <p>
-            0 MAD
-        </p>
-
-    </div>
 
 
 </div>
 
 
-<div class="card">
-
-    <h3>
-        <%= LanguageManager.get("dashboard.card.title", session) %>
-    </h3>
 
 
-    <p>
-        <%= LanguageManager.get("dashboard.card.text", session) %>
-    </p>
+
+
+
+
+
+
+<!-- ==========================
+     WELCOME SECTION
+     ========================== -->
+
+
+<div class="card welcome-card">
+
+
+    <div class="welcome-icon">
+
+        🚀
+
+    </div>
+
+
+
+    <div>
+
+
+        <h3>
+
+            <%= LanguageManager.get("dashboard.card.title", session) %>
+
+        </h3>
+
+
+
+        <p>
+
+            <%= LanguageManager.get("dashboard.card.text", session) %>
+
+        </p>
+
+
+
+    </div>
 
 
 </div>

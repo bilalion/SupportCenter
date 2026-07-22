@@ -20,6 +20,7 @@ String direction =
 
 
 
+
 <!DOCTYPE html>
 
 <html lang="<%=lang%>" dir="<%=direction%>">
@@ -41,7 +42,7 @@ String direction =
 
 
 <link rel="stylesheet"
-href="<%=request.getContextPath()%>/assets/css/super_admin_dashboard.css?v=1002">
+href="<%=request.getContextPath()%>/assets/css/super_admin_dashboard.css?v=1008">
 
 
 
@@ -61,7 +62,9 @@ window.contextPath =
 
 
 
+
 </head>
+
 
 
 
@@ -71,9 +74,10 @@ window.contextPath =
 
 
 
-<!-- ==========================
+
+<!-- =================================================
      SIDEBAR COMPONENT
-     ========================== -->
+     ================================================= -->
 
 
 <jsp:include page="components/sidebar.jsp"/>
@@ -84,10 +88,9 @@ window.contextPath =
 
 
 
-
-<!-- ==========================
+<!-- =================================================
      MAIN CONTENT
-     ========================== -->
+     ================================================= -->
 
 
 <div class="main-content">
@@ -96,26 +99,42 @@ window.contextPath =
 
 
 
-<!-- LANGUAGE COMPONENT -->
-
-<jsp:include page="components/language.jsp"/>
 
 
+<!-- =================================================
+     HEADER COMPONENT
+     يحتوي:
+     - عنوان النظام
+     - اللغة
+     - المستخدم
+     ================================================= -->
+
+
+<jsp:include page="components/header.jsp"/>
 
 
 
 
 
-<!-- DYNAMIC CONTENT -->
+
+
+
+<!-- =================================================
+     DYNAMIC CONTENT AREA
+     ================================================= -->
 
 
 <div id="content-area">
 
 
+
     <jsp:include page="pages/accueil.jsp"/>
 
 
+
 </div>
+
+
 
 
 
@@ -130,6 +149,7 @@ window.contextPath =
 
 
 </body>
+
 
 
 </html>
