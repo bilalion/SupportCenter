@@ -31,7 +31,9 @@ String direction =
 <meta charset="UTF-8">
 
 
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate">
+
 
 
 <title>
@@ -42,12 +44,14 @@ String direction =
 
 
 
+
 <link rel="stylesheet"
-href="<%=request.getContextPath()%>/assets/css/superlogin.css?v=1">
+href="<%=request.getContextPath()%>/assets/css/superlogin.css?v=2">
 
 
 
 </head>
+
 
 
 
@@ -58,11 +62,10 @@ href="<%=request.getContextPath()%>/assets/css/superlogin.css?v=1">
 
 
 
-
-<div class="login-card">
-
-
-
+<!-- ==========================
+     LANGUAGE SWITCHER
+     خارج صندوق الدخول
+     ========================== -->
 
 
 <div class="language-switcher">
@@ -81,6 +84,69 @@ href="<%=request.getContextPath()%>/assets/css/superlogin.css?v=1">
 🇫🇷 Français
 
 </a>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ==========================
+     LOGIN CARD
+     ========================== -->
+
+
+<div class="login-card">
+
+
+
+
+
+
+
+<!-- ==========================
+     BRAND
+     ========================== -->
+
+
+<div class="login-brand">
+
+
+
+<img
+
+src="<%=request.getContextPath()%>/assets/images/centria-logo.png"
+
+alt="Centria Logo"
+
+class="login-logo"
+
+
+
+>
+
+
+
+
+<h1>
+
+Centria
+
+</h1>
+
+
+
+<span>
+
+Super Admin
+
+</span>
 
 
 
@@ -152,7 +218,12 @@ if(loginError){
 
 
 
-<div id="dbStatus" class="db-status checking">
+
+<!-- Database Status -->
+
+
+<div id="dbStatus"
+     class="db-status checking">
 
 
 <%= LanguageManager.get("database.checking", session) %>
@@ -177,6 +248,21 @@ if(loginError){
 
 
 
+
+<!-- Username -->
+
+
+<div class="input-group">
+
+
+<span class="input-icon">
+
+👤
+
+</span>
+
+
+
 <input type="text"
 
        name="username"
@@ -187,14 +273,28 @@ if(loginError){
 
 
 
+</div>
 
 
 
+
+
+
+
+
+
+<!-- Password -->
 
 
 <div class="password-wrapper">
 
 
+
+<span class="input-icon">
+
+🔒
+
+</span>
 
 
 
@@ -212,7 +312,6 @@ if(loginError){
 
 
 
-
 <div class="toggle-btn"
 
      onclick="togglePassword()">
@@ -222,32 +321,31 @@ if(loginError){
 👁
 
 
-</div>
-
-
 
 </div>
 
 
 
+</div>
 
 
 
 
+
+
+
+
+
+<!-- Remember -->
 
 
 <div class="remember-me">
 
 
 
-
-
 <input type="checkbox"
 
        name="remember">
-
-
-
 
 
 
@@ -258,7 +356,6 @@ if(loginError){
 
 
 </label>
-
 
 
 
@@ -281,9 +378,9 @@ if(loginError){
         disabled>
 
 
+🚀
 
 <%= LanguageManager.get("login.button", session) %>
-
 
 
 </button>
@@ -326,10 +423,9 @@ const contextPath =
 
 
 
-<script src="<%=request.getContextPath()%>/assets/js/superlogin.js?v=1">
+<script src="<%=request.getContextPath()%>/assets/js/superlogin.js?v=2">
 
 </script>
-
 
 
 
