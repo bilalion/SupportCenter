@@ -3,6 +3,7 @@
 <%@page import="config.LanguageManager"%>
 <%@page import="model.Centre"%>
 <%@page import="java.util.List"%>
+<%@page import="java.text.SimpleDateFormat"%>
 
 
 
@@ -30,7 +31,6 @@
 
 
 
-
 <!-- ==========================
      TOOLBAR
      ========================== -->
@@ -40,162 +40,158 @@
 
 
 
-    <form method="get"
-          action="<%=request.getContextPath()%>/CentreServlet"
-          class="centres-filter-form">
+<form method="get"
+      action="<%=request.getContextPath()%>/CentreServlet"
+      class="centres-filter-form"
+      onsubmit="searchCentres(event)">
 
 
+<input type="hidden"
+       name="action"
+       value="list">
 
-        <input type="hidden"
-               name="action"
-               value="list">
 
 
 
 
+<!-- SEARCH -->
 
-        <!-- SEARCH -->
+<div class="search-box">
 
 
-        <div class="search-box">
+<input type="text"
+       name="search"
+       value="<%= request.getAttribute("search") != null 
+                ? request.getAttribute("search") 
+                : "" %>"
+       placeholder="<%=LanguageManager.get("centers.search.placeholder",session)%>">
 
 
-            <input type="text"
-                   name="search"
-                   value="<%= request.getAttribute("search") != null 
-                            ? request.getAttribute("search") 
-                            : "" %>"
-                   placeholder="<%=LanguageManager.get("centers.search.placeholder", session)%>">
+</div>
 
 
-        </div>
 
 
 
 
 
+<!-- STATUS FILTER -->
 
-        <!-- STATUS -->
 
+<select name="status" class="centre-select">
 
-        <select name="status">
 
+<option value="ALL">
 
-            <option value="ALL">
+<%=LanguageManager.get("centers.all",session)%>
 
-                <%=LanguageManager.get("centers.all",session)%>
+</option>
 
-            </option>
 
 
+<option value="ACTIVE">
 
-            <option value="ACTIVE">
+<%=LanguageManager.get("centers.active",session)%>
 
-                <%=LanguageManager.get("centers.active",session)%>
+</option>
 
-            </option>
 
 
+<option value="SUSPENDED">
 
+<%=LanguageManager.get("centers.suspended",session)%>
 
-            <option value="INACTIVE">
+</option>
 
-                <%=LanguageManager.get("centers.inactive",session)%>
 
-            </option>
 
+<option value="INACTIVE">
 
+<%=LanguageManager.get("centers.inactive",session)%>
 
+</option>
 
-            <option value="SUSPENDED">
 
-                <%=LanguageManager.get("centers.suspended",session)%>
+</select>
 
-            </option>
 
 
 
-        </select>
 
 
 
+<!-- ORDER -->
 
 
+<select name="order" class="centre-select">
 
 
+<option value="NEW">
 
-        <!-- ORDER -->
+<%=LanguageManager.get("centers.newest",session)%>
 
+</option>
 
-        <select name="order">
 
 
-            <option value="NEW">
+<option value="OLD">
 
-                <%=LanguageManager.get("centers.newest",session)%>
+<%=LanguageManager.get("centers.oldest",session)%>
 
-            </option>
+</option>
 
 
 
-            <option value="OLD">
+<option value="NAME">
 
-                <%=LanguageManager.get("centers.oldest",session)%>
+<%=LanguageManager.get("centers.name.asc",session)%>
 
-            </option>
+</option>
 
 
 
-            <option value="NAME">
+</select>
 
-                <%=LanguageManager.get("centers.name.asc",session)%>
 
-            </option>
 
 
 
-        </select>
 
+<button type="submit"
+        class="btn-primary">
 
 
+🔎
 
+<%=LanguageManager.get("centers.search",session)%>
 
 
+</button>
 
-        <button type="submit"
-                class="btn-primary">
 
 
-            🔎
-            <%=LanguageManager.get("centers.search",session)%>
 
 
-        </button>
 
+</form>
 
 
 
 
-    </form>
 
 
+<!-- ADD -->
 
 
+<button class="btn-primary">
 
-    <!-- ADD BUTTON -->
 
+➕
 
-    <button class="btn-primary">
+<%=LanguageManager.get("centers.add",session)%>
 
 
-        ➕
-
-        <%=LanguageManager.get("centers.add",session)%>
-
-
-    </button>
-
-
+</button>
 
 
 
@@ -208,9 +204,8 @@
 
 
 
-
 <!-- ==========================
-     LIST
+     TABLE CARD
      ========================== -->
 
 
@@ -229,11 +224,15 @@
 
 
 
-
 <%
 
 List<Centre> centres =
 (List<Centre>)request.getAttribute("centres");
+
+
+
+SimpleDateFormat sdf =
+new SimpleDateFormat("dd/MM/yyyy");
 
 
 
@@ -243,7 +242,6 @@ if(centres == null || centres.isEmpty()){
 %>
 
 
-
 <p>
 
 <%=LanguageManager.get("centers.empty",session)%>
@@ -251,13 +249,9 @@ if(centres == null || centres.isEmpty()){
 </p>
 
 
-
-
 <%
 
-}
-
-else{
+}else{
 
 
 %>
@@ -281,9 +275,12 @@ else{
 <tr>
 
 
+
 <th>
 <%=LanguageManager.get("centers.id",session)%>
 </th>
+
+
 
 
 <th>
@@ -291,9 +288,20 @@ else{
 </th>
 
 
+
+
 <th>
-<%=LanguageManager.get("centers.city",session)%>
+<%=LanguageManager.get("centers.owner",session)%>
 </th>
+
+
+
+
+<th>
+<%=LanguageManager.get("centers.username",session)%>
+</th>
+
+
 
 
 <th>
@@ -301,9 +309,20 @@ else{
 </th>
 
 
+
+
 <th>
-<%=LanguageManager.get("centers.email",session)%>
+<%=LanguageManager.get("centers.subscription.start",session)%>
 </th>
+
+
+
+
+<th>
+<%=LanguageManager.get("centers.subscription.end",session)%>
+</th>
+
+
 
 
 <th>
@@ -311,9 +330,6 @@ else{
 </th>
 
 
-<th>
-<%=LanguageManager.get("centers.created",session)%>
-</th>
 
 
 <th>
@@ -322,18 +338,13 @@ else{
 
 
 
+
 </tr>
 
 
 </thead>
 
-
-
-
-
-
 <tbody>
-
 
 
 
@@ -342,23 +353,32 @@ else{
 for(Centre centre : centres){
 
 
+
 String status =
 centre.getStatus();
 
 
-String statusClass="status-active";
 
+String statusClass =
+"status-active";
 
-if("INACTIVE".equals(status)){
-
-statusClass="status-inactive";
-
-}
 
 
 if("SUSPENDED".equals(status)){
 
-statusClass="status-suspended";
+
+    statusClass="status-suspended";
+
+
+}
+
+
+
+if("INACTIVE".equals(status)){
+
+
+    statusClass="status-inactive";
+
 
 }
 
@@ -374,6 +394,9 @@ statusClass="status-suspended";
 
 
 
+
+<!-- ID -->
+
 <td>
 
 <%=centre.getId()%>
@@ -384,25 +407,53 @@ statusClass="status-suspended";
 
 
 
+<!-- NAME -->
+
 <td>
+
+<strong>
 
 <%=centre.getName()%>
 
+</strong>
+
 </td>
 
 
 
 
+
+
+
+<!-- OWNER -->
 
 <td>
 
-<%=centre.getCity()%>
+<%=centre.getOwnerName()%>
 
 </td>
 
 
 
 
+
+
+
+<!-- USERNAME -->
+
+<td>
+
+<%=centre.getUsername()%>
+
+</td>
+
+
+
+
+
+
+
+<!-- PHONE -->
 
 <td>
 
@@ -414,9 +465,39 @@ statusClass="status-suspended";
 
 
 
+
+
+<!-- START SUBSCRIPTION -->
+
 <td>
 
-<%=centre.getEmail()%>
+
+<%
+
+if(centre.getSubscriptionStart()!=null){
+
+%>
+
+
+<%=sdf.format(
+        centre.getSubscriptionStart()
+)%>
+
+
+<%
+
+}else{
+
+%>
+
+-
+
+<%
+
+}
+
+%>
+
 
 </td>
 
@@ -425,12 +506,57 @@ statusClass="status-suspended";
 
 
 
+
+<!-- END SUBSCRIPTION -->
+
+<td>
+
+
+<%
+
+if(centre.getSubscriptionEnd()!=null){
+
+%>
+
+
+<%=sdf.format(
+        centre.getSubscriptionEnd()
+)%>
+
+
+<%
+
+}else{
+
+%>
+
+-
+
+<%
+
+}
+
+%>
+
+
+</td>
+
+
+
+
+
+
+
+<!-- STATUS -->
+
 <td>
 
 
 <span class="status-badge <%=statusClass%>">
 
+
 <%=status%>
+
 
 </span>
 
@@ -442,16 +568,8 @@ statusClass="status-suspended";
 
 
 
-<td>
 
-<%=centre.getCreatedAt()%>
-
-</td>
-
-
-
-
-
+<!-- ACTIONS -->
 
 <td>
 
@@ -459,51 +577,85 @@ statusClass="status-suspended";
 <div class="actions">
 
 
+
+
+
+<!-- VIEW -->
+
 <a href="#"
-class="action-btn action-view"
-title="<%=LanguageManager.get("centers.view",session)%>">
+   class="action-btn action-view"
+   title="<%=LanguageManager.get("centers.view",session)%>">
+
 
 👁
 
+
 </a>
 
 
 
+
+
+
+
+<!-- EDIT -->
+
 <a href="#"
-class="action-btn action-edit"
-title="<%=LanguageManager.get("centers.edit",session)%>">
+   class="action-btn action-edit"
+   title="<%=LanguageManager.get("centers.edit",session)%>">
+
 
 ✏️
 
+
 </a>
 
 
 
+
+
+
+
+<!-- RESET PASSWORD -->
+
 <a href="#"
-class="action-btn action-stop"
-title="<%=LanguageManager.get("centers.stop",session)%>">
+   class="action-btn action-renew"
+   title="Reset Password">
+
+
+🔑
+
+
+</a>
+
+
+
+
+
+
+
+<!-- STOP -->
+
+<a href="#"
+   class="action-btn action-stop"
+   title="<%=LanguageManager.get("centers.stop",session)%>">
+
 
 ⏸
 
-</a>
-
-
-
-<a href="#"
-class="action-btn action-renew"
-title="<%=LanguageManager.get("centers.renew",session)%>">
-
-♻️
 
 </a>
+
+
+
 
 
 
 </div>
 
 
-
 </td>
+
 
 
 

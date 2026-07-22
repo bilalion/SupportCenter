@@ -45,9 +45,7 @@ String direction =
 href="<%=request.getContextPath()%>/assets/css/super_admin_dashboard.css?v=1008">
 
 <link rel="stylesheet"
-href="<%=request.getContextPath()%>/assets/css/centres.css?v=1">
-
-
+href="<%=request.getContextPath()%>/assets/css/centres.css?v=1009">
 
 <script>
 
@@ -60,7 +58,7 @@ window.contextPath =
 
 
 <script src="<%=request.getContextPath()%>/assets/js/super_admin_dashboard.js"></script>
-
+<script src="<%=request.getContextPath()%>/assets/js/centres.js?v=2"></script>
 
 
 

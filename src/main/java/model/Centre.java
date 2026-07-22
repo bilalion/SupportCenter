@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 
@@ -14,13 +15,17 @@ public class Centre {
 
     private String name;
 
-    private String city;
+    private String ownerName;
+
+    private String username;
+
+    private String password;
 
     private String phone;
 
-    private String email;
+    private Date subscriptionStart;
 
-    private String address;
+    private Date subscriptionEnd;
 
     private String status;
 
@@ -45,20 +50,24 @@ public class Centre {
     public Centre(
             int id,
             String name,
-            String city,
+            String ownerName,
+            String username,
+            String password,
             String phone,
-            String email,
-            String address,
+            Date subscriptionStart,
+            Date subscriptionEnd,
             String status,
             Timestamp createdAt
     ) {
 
         this.id = id;
         this.name = name;
-        this.city = city;
+        this.ownerName = ownerName;
+        this.username = username;
+        this.password = password;
         this.phone = phone;
-        this.email = email;
-        this.address = address;
+        this.subscriptionStart = subscriptionStart;
+        this.subscriptionEnd = subscriptionEnd;
         this.status = status;
         this.createdAt = createdAt;
 
@@ -72,65 +81,52 @@ public class Centre {
 
 
     public int getId() {
-
         return id;
-
     }
-
 
 
     public String getName() {
-
         return name;
-
     }
 
 
-
-    public String getCity() {
-
-        return city;
-
+    public String getOwnerName() {
+        return ownerName;
     }
 
+
+    public String getUsername() {
+        return username;
+    }
+
+
+    public String getPassword() {
+        return password;
+    }
 
 
     public String getPhone() {
-
         return phone;
-
     }
 
 
-
-    public String getEmail() {
-
-        return email;
-
+    public Date getSubscriptionStart() {
+        return subscriptionStart;
     }
 
 
-
-    public String getAddress() {
-
-        return address;
-
+    public Date getSubscriptionEnd() {
+        return subscriptionEnd;
     }
-
 
 
     public String getStatus() {
-
         return status;
-
     }
 
 
-
     public Timestamp getCreatedAt() {
-
         return createdAt;
-
     }
 
 
@@ -143,67 +139,53 @@ public class Centre {
 
 
     public void setId(int id) {
-
         this.id = id;
-
     }
-
 
 
     public void setName(String name) {
-
         this.name = name;
-
     }
 
 
-
-    public void setCity(String city) {
-
-        this.city = city;
-
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
     }
 
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
 
     public void setPhone(String phone) {
-
         this.phone = phone;
-
     }
 
 
-
-    public void setEmail(String email) {
-
-        this.email = email;
-
+    public void setSubscriptionStart(Date subscriptionStart) {
+        this.subscriptionStart = subscriptionStart;
     }
 
 
-
-    public void setAddress(String address) {
-
-        this.address = address;
-
+    public void setSubscriptionEnd(Date subscriptionEnd) {
+        this.subscriptionEnd = subscriptionEnd;
     }
-
 
 
     public void setStatus(String status) {
-
         this.status = status;
-
     }
-
 
 
     public void setCreatedAt(Timestamp createdAt) {
-
         this.createdAt = createdAt;
-
     }
-
 
 
 }

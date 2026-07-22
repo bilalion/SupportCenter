@@ -2,7 +2,6 @@ package dao;
 
 
 import config.DatabaseConfig;
-
 import model.Centre;
 
 import java.sql.Connection;
@@ -22,16 +21,13 @@ public class CentreDAO {
     // GET ALL CENTRES
     // =====================================
 
-
     public List<Centre> getAllCentres(){
-
 
         return searchCentres(
                 "",
                 "ALL",
                 "NEW"
         );
-
 
     }
 
@@ -44,7 +40,6 @@ public class CentreDAO {
     // SEARCH + FILTER + ORDER
     // =====================================
 
-
     public List<Centre> searchCentres(
             String search,
             String status,
@@ -54,7 +49,6 @@ public class CentreDAO {
 
         List<Centre> centres =
                 new ArrayList<>();
-
 
 
         StringBuilder sql =
@@ -74,15 +68,15 @@ public class CentreDAO {
         // SEARCH
         // ==========================
 
-
         if(search != null &&
            !search.trim().isEmpty()){
 
 
             sql.append(
-            " AND (name LIKE ? "
-            + "OR city LIKE ? "
-            + "OR phone LIKE ?) "
+                " AND (name LIKE ? "
+                + "OR owner_name LIKE ? "
+                + "OR username LIKE ? "
+                + "OR phone LIKE ?) "
             );
 
 
@@ -96,7 +90,6 @@ public class CentreDAO {
         // ==========================
         // STATUS FILTER
         // ==========================
-
 
         if(status != null &&
            !status.equals("ALL")){
@@ -114,10 +107,10 @@ public class CentreDAO {
 
 
 
+
         // ==========================
         // ORDER
         // ==========================
-
 
         if(order == null){
 
@@ -127,9 +120,7 @@ public class CentreDAO {
 
 
 
-
         switch(order){
-
 
 
             case "OLD":
@@ -141,7 +132,6 @@ public class CentreDAO {
 
 
                 break;
-
 
 
 
@@ -157,8 +147,8 @@ public class CentreDAO {
 
 
 
-
             case "NEW":
+
             default:
 
 
@@ -169,8 +159,8 @@ public class CentreDAO {
 
                 break;
 
-
         }
+
 
 
 
@@ -194,12 +184,16 @@ public class CentreDAO {
 
 
 
-            int index=1;
+            int index = 1;
 
 
 
 
 
+
+            // ==========================
+            // SEARCH VALUES
+            // ==========================
 
             if(search != null &&
                !search.trim().isEmpty()){
@@ -207,7 +201,7 @@ public class CentreDAO {
 
 
                 String value =
-                "%" + search + "%";
+                        "%" + search + "%";
 
 
 
@@ -217,6 +211,11 @@ public class CentreDAO {
                 );
 
 
+                ps.setString(
+                    index++,
+                    value
+                );
+
 
                 ps.setString(
                     index++,
@@ -224,13 +223,10 @@ public class CentreDAO {
                 );
 
 
-
                 ps.setString(
                     index++,
                     value
                 );
-
-
 
             }
 
@@ -240,9 +236,12 @@ public class CentreDAO {
 
 
 
+            // ==========================
+            // STATUS VALUE
+            // ==========================
+
             if(status != null &&
                !status.equals("ALL")){
-
 
 
                 ps.setString(
@@ -260,7 +259,7 @@ public class CentreDAO {
 
 
             ResultSet rs =
-            ps.executeQuery();
+                    ps.executeQuery();
 
 
 
@@ -272,7 +271,8 @@ public class CentreDAO {
 
 
                 Centre centre =
-                new Centre();
+                        new Centre();
+
 
 
 
@@ -288,8 +288,14 @@ public class CentreDAO {
 
 
 
-                centre.setCity(
-                    rs.getString("city")
+                centre.setOwnerName(
+                    rs.getString("owner_name")
+                );
+
+
+
+                centre.setUsername(
+                    rs.getString("username")
                 );
 
 
@@ -300,14 +306,14 @@ public class CentreDAO {
 
 
 
-                centre.setEmail(
-                    rs.getString("email")
+                centre.setSubscriptionStart(
+                    rs.getDate("subscription_start")
                 );
 
 
 
-                centre.setAddress(
-                    rs.getString("address")
+                centre.setSubscriptionEnd(
+                    rs.getDate("subscription_end")
                 );
 
 
@@ -334,6 +340,7 @@ public class CentreDAO {
 
 
 
+
         }
         catch(Exception e){
 
@@ -342,6 +349,7 @@ public class CentreDAO {
 
 
         }
+
 
 
 

@@ -46,12 +46,17 @@ public class CentreServlet extends HttpServlet {
 
 
 
+
     @Override
     protected void doGet(
             HttpServletRequest request,
             HttpServletResponse response
     )
     throws ServletException, IOException {
+
+
+
+        request.setCharacterEncoding("UTF-8");
 
 
 
@@ -62,11 +67,10 @@ public class CentreServlet extends HttpServlet {
 
         if(action == null){
 
-
             action = "list";
 
-
         }
+
 
 
 
@@ -75,37 +79,18 @@ public class CentreServlet extends HttpServlet {
         switch(action){
 
 
-
             case "list":
-
-
-
-                listCentres(
-                    request,
-                    response
-                );
-
-
-
-                break;
-
-
-
-
 
             default:
 
 
-
                 listCentres(
                     request,
                     response
                 );
 
 
-
                 break;
-
 
 
         }
@@ -131,29 +116,32 @@ public class CentreServlet extends HttpServlet {
 
 
         // ==========================
-        // FILTER PARAMETERS
+        // PARAMETERS
         // ==========================
 
 
         String search =
-        request.getParameter("search");
+                request.getParameter("search");
 
 
 
         String status =
-        request.getParameter("status");
+                request.getParameter("status");
 
 
 
         String order =
-        request.getParameter("order");
+                request.getParameter("order");
 
 
 
 
 
 
-        // Default values
+
+        // ==========================
+        // DEFAULT VALUES
+        // ==========================
 
 
         if(search == null){
@@ -165,7 +153,7 @@ public class CentreServlet extends HttpServlet {
 
 
 
-        if(status == null){
+        if(status == null || status.isEmpty()){
 
             status = "ALL";
 
@@ -174,7 +162,7 @@ public class CentreServlet extends HttpServlet {
 
 
 
-        if(order == null){
+        if(order == null || order.isEmpty()){
 
             order = "NEW";
 
@@ -192,16 +180,21 @@ public class CentreServlet extends HttpServlet {
 
 
         List<Centre> centres =
-        centreDAO.searchCentres(
-                search,
-                status,
-                order
-        );
+                centreDAO.searchCentres(
+                    search,
+                    status,
+                    order
+                );
 
 
 
 
 
+
+
+        // ==========================
+        // SEND DATA
+        // ==========================
 
 
         request.setAttribute(
@@ -209,10 +202,6 @@ public class CentreServlet extends HttpServlet {
                 centres
         );
 
-
-
-
-        // Keep values after search
 
 
         request.setAttribute(
@@ -240,6 +229,43 @@ public class CentreServlet extends HttpServlet {
 
 
 
+
+        // ==========================
+        // AJAX OR NORMAL LOAD
+        // ==========================
+
+
+        String ajax =
+                request.getParameter("ajax");
+
+
+
+
+        if("true".equals(ajax)){
+
+
+            request.getRequestDispatcher(
+                    "/admin/pages/centres.jsp"
+            )
+            .forward(
+                    request,
+                    response
+            );
+
+
+            return;
+
+
+        }
+
+
+
+
+
+
+        // NORMAL REQUEST
+
+
         request.getRequestDispatcher(
                 "/admin/pages/centres.jsp"
         )
@@ -251,6 +277,7 @@ public class CentreServlet extends HttpServlet {
 
 
     }
+
 
 
 
@@ -275,6 +302,7 @@ public class CentreServlet extends HttpServlet {
 
 
     }
+
 
 
 
