@@ -81,8 +81,16 @@
 
 
 
+
+
+        <!-- ==========================
+             CENTRES
+             تحميل من Servlet
+             ========================== -->
+
+
         <a href="javascript:void(0)"
-           onclick="loadContent('centres.jsp')">
+           onclick="loadContent('CentreServlet?action=list')">
 
 
             🏢
@@ -91,6 +99,9 @@
 
 
         </a>
+
+
+
 
 
 

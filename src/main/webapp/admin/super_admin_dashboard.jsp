@@ -44,7 +44,8 @@ String direction =
 <link rel="stylesheet"
 href="<%=request.getContextPath()%>/assets/css/super_admin_dashboard.css?v=1008">
 
-
+<link rel="stylesheet"
+href="<%=request.getContextPath()%>/assets/css/centres.css?v=1">
 
 
 

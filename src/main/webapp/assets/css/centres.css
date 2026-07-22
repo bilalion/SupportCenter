@@ -1,0 +1,644 @@
+/*
+    CENTRIA
+    Centre Management Module
+    Professional UI
+*/
+
+
+/* ==========================
+   CENTRES TOOLBAR
+   ========================== */
+
+
+.centres-toolbar{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:25px;
+
+    gap:20px;
+
+}
+
+
+
+.centres-toolbar h3{
+
+    font-size:22px;
+
+    color:#1e293b;
+
+}
+
+
+
+
+
+/* ==========================
+   ADD BUTTON
+   ========================== */
+
+
+.btn-primary{
+
+    border:none;
+
+    cursor:pointer;
+
+    padding:12px 22px;
+
+    border-radius:12px;
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #2563eb,
+        #1d4ed8
+    );
+
+    color:white;
+
+    font-weight:700;
+
+    font-size:14px;
+
+    transition:.3s;
+
+}
+
+
+
+.btn-primary:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+
+    0 8px 18px rgba(37,99,235,.35);
+
+}
+
+
+
+
+
+/* ==========================
+   FILTER BAR
+   ========================== */
+
+
+.centres-filter-bar{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:25px;
+
+    flex-wrap:wrap;
+
+}
+
+
+
+
+
+/* ==========================
+   SEARCH
+   ========================== */
+
+
+.search-box{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    background:#f8fafc;
+
+    border:1px solid #e2e8f0;
+
+    padding:10px 15px;
+
+    border-radius:12px;
+
+}
+
+
+
+
+
+.search-box input{
+
+    border:none;
+
+    outline:none;
+
+    background:transparent;
+
+    width:280px;
+
+    font-size:14px;
+
+}
+
+
+
+
+
+.search-box input:focus{
+
+    width:320px;
+
+}
+
+
+
+
+
+/* ==========================
+   SELECT
+   ========================== */
+
+
+.filter-select{
+
+    padding:11px 15px;
+
+    border-radius:12px;
+
+    border:1px solid #e2e8f0;
+
+    background:white;
+
+    color:#475569;
+
+    font-size:14px;
+
+    cursor:pointer;
+
+    outline:none;
+
+}
+
+
+
+
+
+.filter-select:hover{
+
+    border-color:#2563eb;
+
+}
+
+
+
+
+
+
+
+
+/* ==========================
+   TABLE CONTAINER
+   ========================== */
+
+
+.table-container{
+
+    width:100%;
+
+    overflow-x:auto;
+
+}
+
+
+
+
+
+
+/* ==========================
+   TABLE
+   ========================== */
+
+
+.centers-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    background:white;
+
+    border-radius:15px;
+
+    overflow:hidden;
+
+}
+
+
+
+
+
+
+.centers-table thead{
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #1e293b,
+        #334155
+    );
+
+}
+
+
+
+
+
+.centers-table th{
+
+    color:white;
+
+    padding:14px 12px;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    white-space:nowrap;
+
+}
+
+
+
+
+
+
+
+.centers-table td{
+
+    padding:13px 12px;
+
+    text-align:center;
+
+    color:#475569;
+
+    font-size:14px;
+
+    border-bottom:
+
+    1px solid #e2e8f0;
+
+}
+
+
+
+
+
+.centers-table tbody tr{
+
+    transition:.25s;
+
+}
+
+
+
+
+
+.centers-table tbody tr:hover{
+
+    background:#f8fafc;
+
+}
+
+
+
+
+
+.centers-table td strong{
+
+    color:#1e293b;
+
+}
+
+
+
+
+
+
+/* ==========================
+   STATUS BADGES
+   ========================== */
+
+
+.status-badge{
+
+    display:inline-block;
+
+    padding:6px 15px;
+
+    border-radius:30px;
+
+    font-size:12px;
+
+    font-weight:700;
+
+}
+
+
+
+
+
+.status-active{
+
+    background:#dcfce7;
+
+    color:#166534;
+
+}
+
+
+
+
+
+.status-inactive{
+
+    background:#fee2e2;
+
+    color:#991b1b;
+
+}
+
+
+
+
+
+.status-suspended{
+
+    background:#fef3c7;
+
+    color:#92400e;
+
+}
+
+
+
+
+
+
+
+/* ==========================
+   ACTION BUTTONS
+   ========================== */
+
+
+.actions{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:7px;
+
+}
+
+
+
+
+
+.action-btn{
+
+    width:34px;
+
+    height:34px;
+
+    border-radius:10px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:white;
+
+    text-decoration:none;
+
+    font-size:14px;
+
+    transition:.3s;
+
+}
+
+
+
+
+
+.action-btn:hover{
+
+    transform:translateY(-3px);
+
+}
+
+
+
+
+
+.action-view{
+
+    background:#0ea5e9;
+
+}
+
+
+
+
+
+.action-edit{
+
+    background:#2563eb;
+
+}
+
+
+
+
+
+.action-stop{
+
+    background:#ef4444;
+
+}
+
+
+
+
+
+.action-renew{
+
+    background:#16a34a;
+
+}
+
+
+
+
+
+
+/* ==========================
+   EMPTY MESSAGE
+   ========================== */
+
+
+.empty-message{
+
+    padding:30px;
+
+    text-align:center;
+
+    color:#64748b;
+
+    background:white;
+
+    border-radius:15px;
+
+}
+
+
+
+
+
+
+
+/* ==========================
+   RTL ARABIC
+   ========================== */
+
+
+html[dir="rtl"] .centres-toolbar{
+
+    flex-direction:row-reverse;
+
+}
+
+
+
+html[dir="rtl"] .centres-filter-bar{
+
+    flex-direction:row-reverse;
+
+}
+
+
+
+html[dir="rtl"] .search-box input{
+
+    text-align:right;
+
+}
+
+
+
+
+
+
+/* ==========================
+   LTR FRENCH
+   ========================== */
+
+
+html[dir="ltr"] .centres-toolbar{
+
+    flex-direction:row;
+
+}
+
+
+
+html[dir="ltr"] .centres-filter-bar{
+
+    flex-direction:row;
+
+}
+
+
+
+html[dir="ltr"] .search-box input{
+
+    text-align:left;
+
+}
+
+
+
+
+
+
+
+/* ==========================
+   RESPONSIVE
+   ========================== */
+
+
+@media(max-width:900px){
+
+
+    .centres-toolbar{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+    }
+
+
+
+
+    .centres-filter-bar{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+    }
+
+
+
+
+    .search-box input{
+
+        width:100%;
+
+    }
+
+
+
+
+    .search-box input:focus{
+
+        width:100%;
+
+    }
+
+
+
+
+    .actions{
+
+        flex-wrap:wrap;
+
+    }
+
+
+
+}

@@ -1,30 +1,135 @@
-/* 
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/JavaScript.js to edit this template
- */
-
-
 /*
  * Centria
  * Super Admin Dashboard
  */
 
+
 function loadContent(page) {
 
-    fetch(window.contextPath + "/admin/pages/" + page)
 
-        .then(response => response.text())
 
-        .then(data => {
+    let url;
 
-            document.getElementById("content-area").innerHTML = data;
 
-        })
 
-        .catch(error => {
 
-            console.error("Loading error:", error);
+    /*
+     * Servlet loading
+     * Example:
+     * CentreServlet?action=list
+     */
 
-        });
+    if(page.startsWith("CentreServlet")) {
+
+
+
+        url =
+        window.contextPath +
+        "/" +
+        page;
+
+
+
+    }
+
+
+
+
+    /*
+     * Normal JSP pages
+     */
+
+    else {
+
+
+
+        url =
+        window.contextPath +
+        "/admin/pages/" +
+        page;
+
+
+
+    }
+
+
+
+
+
+
+
+    fetch(url)
+
+
+
+    .then(response => {
+
+
+
+        if(!response.ok) {
+
+
+
+            throw new Error(
+                "HTTP ERROR : " + response.status
+            );
+
+
+
+        }
+
+
+
+        return response.text();
+
+
+
+    })
+
+
+
+
+
+    .then(data => {
+
+
+
+        document.getElementById(
+            "content-area"
+        ).innerHTML = data;
+
+
+
+    })
+
+
+
+
+
+    .catch(error => {
+
+
+
+        console.error(
+            "Loading error:",
+            error
+        );
+
+
+
+        document.getElementById(
+            "content-area"
+        ).innerHTML =
+        `
+        <div class="card">
+            Error loading content
+        </div>
+        `;
+
+
+
+    });
+
+
 
 }

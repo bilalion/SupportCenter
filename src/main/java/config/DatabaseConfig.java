@@ -7,6 +7,9 @@ package config;
 
 import java.io.InputStream;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -17,17 +20,29 @@ import org.w3c.dom.Document;
 public class DatabaseConfig {
 
 
+
     private static String driver;
+
     private static String url;
+
     private static String username;
+
     private static String password;
 
+
+
+
+
+    // ==========================
+    // LOAD DATABASE CONFIG
+    // ==========================
 
 
     static {
 
 
         try {
+
 
 
             DocumentBuilderFactory factory =
@@ -40,6 +55,7 @@ public class DatabaseConfig {
 
 
 
+
             InputStream input =
                     DatabaseConfig.class
                     .getClassLoader()
@@ -47,18 +63,28 @@ public class DatabaseConfig {
 
 
 
+
+
             if(input == null){
+
 
                 throw new RuntimeException(
                     "ERROR : database.xml introuvable"
                 );
 
+
             }
+
+
+
 
 
 
             Document document =
                     builder.parse(input);
+
+
+
 
 
 
@@ -70,11 +96,17 @@ public class DatabaseConfig {
 
 
 
+
+
+
             url =
             document.getElementsByTagName("url")
             .item(0)
             .getTextContent()
             .trim();
+
+
+
 
 
 
@@ -86,6 +118,9 @@ public class DatabaseConfig {
 
 
 
+
+
+
             password =
             document.getElementsByTagName("password")
             .item(0)
@@ -94,16 +129,32 @@ public class DatabaseConfig {
 
 
 
+
+
+
+
             Class.forName(driver);
 
 
 
+
+
+
             System.out.println("======================");
+
             System.out.println("DATABASE CONFIG OK");
+
             System.out.println("Driver : " + driver);
+
             System.out.println("URL : " + url);
+
             System.out.println("User : " + username);
+
             System.out.println("======================");
+
+
+
+
 
 
 
@@ -111,53 +162,119 @@ public class DatabaseConfig {
         catch(Exception e){
 
 
+
+
+
             System.out.println(
                 "DATABASE CONFIG ERROR"
             );
 
 
+
             e.printStackTrace();
+
 
 
             throw new RuntimeException(e);
 
 
+
         }
 
 
+
+
     }
+
+
+
+
+
+
+
+    // ==========================
+    // GETTERS
+    // ==========================
 
 
 
     public static String getDriver(){
 
+
         return driver;
 
+
     }
+
+
+
 
 
 
     public static String getUrl(){
 
+
         return url;
 
+
     }
+
+
+
 
 
 
     public static String getUsername(){
 
+
         return username;
 
+
     }
+
+
+
 
 
 
     public static String getPassword(){
 
+
         return password;
 
+
     }
+
+
+
+
+
+
+
+    // ==========================
+    // DATABASE CONNECTION
+    // ==========================
+
+
+    public static Connection getConnection() throws Exception {
+
+
+
+        return DriverManager.getConnection(
+
+                url,
+
+                username,
+
+                password
+
+        );
+
+
+    }
+
+
+
 
 
 }
