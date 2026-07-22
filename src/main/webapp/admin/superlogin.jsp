@@ -2,15 +2,36 @@
 <%@page import="config.LanguageManager"%>
 
 
+<%
+
+String lang =
+        session.getAttribute("lang") != null
+        ? session.getAttribute("lang").toString()
+        : "ar";
+
+
+String direction =
+        lang.equals("fr")
+        ? "ltr"
+        : "rtl";
+
+
+%>
+
+
+
 <!DOCTYPE html>
 
-<html lang="ar" dir="rtl">
+<html lang="<%=lang%>" dir="<%=direction%>">
 
 
 <head>
 
 
 <meta charset="UTF-8">
+
+
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 
 
 <title>
@@ -22,9 +43,7 @@
 
 
 <link rel="stylesheet"
-href="<%=request.getContextPath()%>/assets/css/superlogin.css">
-
-
+href="<%=request.getContextPath()%>/assets/css/superlogin.css?v=1">
 
 
 
@@ -74,7 +93,6 @@ href="<%=request.getContextPath()%>/assets/css/superlogin.css">
 
 
 
-
 <h2>
 
 <%= LanguageManager.get("login.title", session) %>
@@ -105,14 +123,11 @@ boolean loginError =
 
 
 
-
-
 <%
 
 if(loginError){
 
 %>
-
 
 
 <div class="error-message">
@@ -124,13 +139,11 @@ if(loginError){
 </div>
 
 
-
 <%
 
 }
 
 %>
-
 
 
 
@@ -164,8 +177,6 @@ if(loginError){
 
 
 
-
-
 <input type="text"
 
        name="username"
@@ -173,7 +184,6 @@ if(loginError){
        placeholder="<%= LanguageManager.get("login.username", session) %>"
 
        required>
-
 
 
 
@@ -203,10 +213,10 @@ if(loginError){
 
 
 
-
 <div class="toggle-btn"
 
      onclick="togglePassword()">
+
 
 
 👁
@@ -252,7 +262,6 @@ if(loginError){
 
 
 
-
 </div>
 
 
@@ -278,8 +287,6 @@ if(loginError){
 
 
 </button>
-
-
 
 
 
@@ -318,9 +325,13 @@ const contextPath =
 
 
 
-<script src="<%=request.getContextPath()%>/assets/js/superlogin.js">
+
+<script src="<%=request.getContextPath()%>/assets/js/superlogin.js?v=1">
 
 </script>
+
+
+
 
 
 
