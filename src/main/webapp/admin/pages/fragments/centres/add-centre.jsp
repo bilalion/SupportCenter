@@ -1,6 +1,7 @@
+<%@page import="com.centria.utils.LanguageManager"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<%@page import="config.LanguageManager"%>
+
 
 
 <!DOCTYPE html>
