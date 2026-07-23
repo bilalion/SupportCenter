@@ -179,11 +179,11 @@
 
 
 
-
 <!-- ADD -->
 
 
-<button class="btn-primary">
+<a href="<%=request.getContextPath()%>/admin/pages/add-centre.jsp"
+   class="btn-primary">
 
 
 ➕
@@ -191,8 +191,7 @@
 <%=LanguageManager.get("centers.add",session)%>
 
 
-</button>
-
+</a>
 
 
 </div>
@@ -593,7 +592,7 @@ if(centre.getSubscriptionEnd()!=null){
 </a>
 
 
-
+  
 
 
 

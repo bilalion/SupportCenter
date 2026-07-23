@@ -4,10 +4,6 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 
-/**
- *
- * @author imac
- */
 public class Centre {
 
 
@@ -19,7 +15,7 @@ public class Centre {
 
     private String username;
 
-    private String password;
+    private String passwordHash;
 
     private String phone;
 
@@ -31,160 +27,240 @@ public class Centre {
 
     private Timestamp createdAt;
 
+    private boolean mustChangePassword;
+
+    private Timestamp lastLogin;
 
 
-    // ==========================
-    // Constructeur vide
-    // ==========================
 
-    public Centre() {
+    public Centre(){
 
     }
 
 
-
-    // ==========================
-    // Constructeur complet
-    // ==========================
 
     public Centre(
             int id,
             String name,
             String ownerName,
             String username,
-            String password,
+            String passwordHash,
             String phone,
             Date subscriptionStart,
             Date subscriptionEnd,
             String status,
-            Timestamp createdAt
-    ) {
+            Timestamp createdAt,
+            boolean mustChangePassword,
+            Timestamp lastLogin
+    ){
 
         this.id = id;
         this.name = name;
         this.ownerName = ownerName;
         this.username = username;
-        this.password = password;
+        this.passwordHash = passwordHash;
         this.phone = phone;
         this.subscriptionStart = subscriptionStart;
         this.subscriptionEnd = subscriptionEnd;
         this.status = status;
         this.createdAt = createdAt;
+        this.mustChangePassword = mustChangePassword;
+        this.lastLogin = lastLogin;
 
     }
 
 
 
-    // ==========================
-    // GETTERS
-    // ==========================
 
 
     public int getId() {
+
         return id;
+
     }
 
-
-    public String getName() {
-        return name;
-    }
-
-
-    public String getOwnerName() {
-        return ownerName;
-    }
-
-
-    public String getUsername() {
-        return username;
-    }
-
-
-    public String getPassword() {
-        return password;
-    }
-
-
-    public String getPhone() {
-        return phone;
-    }
-
-
-    public Date getSubscriptionStart() {
-        return subscriptionStart;
-    }
-
-
-    public Date getSubscriptionEnd() {
-        return subscriptionEnd;
-    }
-
-
-    public String getStatus() {
-        return status;
-    }
-
-
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
-
-
-
-
-
-    // ==========================
-    // SETTERS
-    // ==========================
 
 
     public void setId(int id) {
+
         this.id = id;
+
     }
+
+
+
+    public String getName() {
+
+        return name;
+
+    }
+
 
 
     public void setName(String name) {
+
         this.name = name;
+
     }
+
+
+
+    public String getOwnerName() {
+
+        return ownerName;
+
+    }
+
 
 
     public void setOwnerName(String ownerName) {
+
         this.ownerName = ownerName;
+
     }
+
+
+
+    public String getUsername() {
+
+        return username;
+
+    }
+
 
 
     public void setUsername(String username) {
+
         this.username = username;
+
     }
 
 
-    public void setPassword(String password) {
-        this.password = password;
+
+    public String getPasswordHash() {
+
+        return passwordHash;
+
     }
+
+
+
+    public void setPasswordHash(String passwordHash) {
+
+        this.passwordHash = passwordHash;
+
+    }
+
+
+
+    public String getPhone() {
+
+        return phone;
+
+    }
+
 
 
     public void setPhone(String phone) {
+
         this.phone = phone;
+
     }
+
+
+
+    public Date getSubscriptionStart() {
+
+        return subscriptionStart;
+
+    }
+
 
 
     public void setSubscriptionStart(Date subscriptionStart) {
+
         this.subscriptionStart = subscriptionStart;
+
     }
+
+
+
+    public Date getSubscriptionEnd() {
+
+        return subscriptionEnd;
+
+    }
+
 
 
     public void setSubscriptionEnd(Date subscriptionEnd) {
+
         this.subscriptionEnd = subscriptionEnd;
+
     }
+
+
+
+    public String getStatus() {
+
+        return status;
+
+    }
+
 
 
     public void setStatus(String status) {
+
         this.status = status;
+
     }
 
 
+
+    public Timestamp getCreatedAt() {
+
+        return createdAt;
+
+    }
+
+
+
     public void setCreatedAt(Timestamp createdAt) {
+
         this.createdAt = createdAt;
+
+    }
+
+
+
+    public boolean isMustChangePassword() {
+
+        return mustChangePassword;
+
+    }
+
+
+
+    public void setMustChangePassword(boolean mustChangePassword) {
+
+        this.mustChangePassword = mustChangePassword;
+
+    }
+
+
+
+    public Timestamp getLastLogin() {
+
+        return lastLogin;
+
+    }
+
+
+
+    public void setLastLogin(Timestamp lastLogin) {
+
+        this.lastLogin = lastLogin;
+
     }
 
 

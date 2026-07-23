@@ -122,19 +122,82 @@ window.contextPath =
      DYNAMIC CONTENT AREA
      ================================================= -->
 
-
 <div id="content-area">
 
+
+<%
+
+String section =
+        request.getParameter("section");
+
+
+if(section == null || section.isEmpty()){
+
+
+%>
 
 
     <jsp:include page="pages/accueil.jsp"/>
 
 
+<%
+
+
+}else if("centres".equals(section)){
+
+
+%>
+
+
+    <jsp:include page="pages/centres.jsp"/>
+
+
+<%
+
+
+}else if("subscriptions".equals(section)){
+
+
+%>
+
+
+    <jsp:include page="pages/subscriptions.jsp"/>
+
+
+<%
+
+
+}else if("users".equals(section)){
+
+
+%>
+
+
+    <jsp:include page="pages/users.jsp"/>
+
+
+<%
+
+
+}else{
+
+
+%>
+
+
+    <jsp:include page="pages/accueil.jsp"/>
+
+
+<%
+
+
+}
+
+
+%>
+
 
 </div>
-
-
-
 
 
 

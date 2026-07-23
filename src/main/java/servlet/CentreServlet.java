@@ -4,8 +4,15 @@ package servlet;
 import dao.CentreDAO;
 import model.Centre;
 
+import util.PasswordGenerator;
+import util.PasswordUtil;
+
 
 import java.io.IOException;
+import java.sql.Date;
+import java.time.LocalDate;
+
+
 import java.util.List;
 
 
@@ -47,6 +54,7 @@ public class CentreServlet extends HttpServlet {
 
 
 
+
     @Override
     protected void doGet(
             HttpServletRequest request,
@@ -67,11 +75,9 @@ public class CentreServlet extends HttpServlet {
 
         if(action == null){
 
-            action = "list";
+            action="list";
 
         }
-
-
 
 
 
@@ -79,7 +85,20 @@ public class CentreServlet extends HttpServlet {
         switch(action){
 
 
+
             case "list":
+
+
+                listCentres(
+                    request,
+                    response
+                );
+
+
+                break;
+
+
+
 
             default:
 
@@ -107,7 +126,8 @@ public class CentreServlet extends HttpServlet {
 
 
 
-    private void listCentres(
+    @Override
+    protected void doPost(
             HttpServletRequest request,
             HttpServletResponse response
     )
@@ -115,9 +135,60 @@ public class CentreServlet extends HttpServlet {
 
 
 
-        // ==========================
-        // PARAMETERS
-        // ==========================
+        request.setCharacterEncoding("UTF-8");
+
+
+
+        String action =
+                request.getParameter("action");
+
+
+
+
+
+        if("add".equals(action)){
+
+
+
+            addCentre(
+                request,
+                response
+            );
+
+
+            return;
+
+
+        }
+
+
+
+
+
+
+        doGet(
+            request,
+            response
+        );
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+    private void listCentres(
+            HttpServletRequest request,
+            HttpServletResponse response
+    )
+    throws ServletException, IOException {
+
 
 
         String search =
@@ -137,34 +208,25 @@ public class CentreServlet extends HttpServlet {
 
 
 
+        if(search==null){
 
-
-        // ==========================
-        // DEFAULT VALUES
-        // ==========================
-
-
-        if(search == null){
-
-            search = "";
+            search="";
 
         }
 
 
 
+        if(status==null || status.isEmpty()){
 
-        if(status == null || status.isEmpty()){
-
-            status = "ALL";
+            status="ALL";
 
         }
 
 
 
+        if(order==null || order.isEmpty()){
 
-        if(order == null || order.isEmpty()){
-
-            order = "NEW";
+            order="NEW";
 
         }
 
@@ -172,29 +234,18 @@ public class CentreServlet extends HttpServlet {
 
 
 
-
-
-        // ==========================
-        // LOAD DATA
-        // ==========================
 
 
         List<Centre> centres =
                 centreDAO.searchCentres(
-                    search,
-                    status,
-                    order
+                        search,
+                        status,
+                        order
                 );
 
 
 
 
-
-
-
-        // ==========================
-        // SEND DATA
-        // ==========================
 
 
         request.setAttribute(
@@ -228,44 +279,6 @@ public class CentreServlet extends HttpServlet {
 
 
 
-
-
-        // ==========================
-        // AJAX OR NORMAL LOAD
-        // ==========================
-
-
-        String ajax =
-                request.getParameter("ajax");
-
-
-
-
-        if("true".equals(ajax)){
-
-
-            request.getRequestDispatcher(
-                    "/admin/pages/centres.jsp"
-            )
-            .forward(
-                    request,
-                    response
-            );
-
-
-            return;
-
-
-        }
-
-
-
-
-
-
-        // NORMAL REQUEST
-
-
         request.getRequestDispatcher(
                 "/admin/pages/centres.jsp"
         )
@@ -275,7 +288,6 @@ public class CentreServlet extends HttpServlet {
         );
 
 
-
     }
 
 
@@ -286,8 +298,7 @@ public class CentreServlet extends HttpServlet {
 
 
 
-    @Override
-    protected void doPost(
+    private void addCentre(
             HttpServletRequest request,
             HttpServletResponse response
     )
@@ -295,17 +306,243 @@ public class CentreServlet extends HttpServlet {
 
 
 
-        doGet(
-            request,
-            response
+
+
+        String name =
+                request.getParameter("name");
+
+
+
+        String owner =
+                request.getParameter("owner_name");
+
+
+
+        String username =
+                request.getParameter("username");
+
+
+
+        String phone =
+                request.getParameter("phone");
+
+
+
+        String start =
+                request.getParameter(
+                        "subscription_start"
+                );
+
+
+
+        String duration =
+                request.getParameter(
+                        "subscription_duration"
+                );
+
+
+
+
+
+
+        // ==========================
+        // GENERATE FIRST PASSWORD
+        // ==========================
+
+
+        String temporaryPassword =
+                PasswordGenerator.generatePassword();
+
+
+
+
+
+
+        Centre centre =
+                new Centre();
+
+
+
+
+        centre.setName(name);
+
+
+
+        centre.setOwnerName(owner);
+
+
+
+        centre.setUsername(username);
+
+
+
+        centre.setPhone(phone);
+
+
+
+
+        // ==========================
+        // HASH PASSWORD
+        // ==========================
+
+
+        centre.setPasswordHash(
+                PasswordUtil.hashPassword(
+                        temporaryPassword
+                )
         );
 
 
+
+
+
+        centre.setSubscriptionStart(
+                Date.valueOf(start)
+        );
+
+
+
+
+
+
+        // ==========================
+        // SUBSCRIPTION DURATION
+        // ==========================
+
+
+        int months = 3;
+
+
+
+        if("6".equals(duration)){
+
+            months = 6;
+
+        }
+
+
+
+        if("12".equals(duration)){
+
+            months = 12;
+
+        }
+
+
+
+
+
+
+        LocalDate end =
+                LocalDate.parse(start)
+                .plusMonths(months);
+
+
+
+
+
+
+        centre.setSubscriptionEnd(
+                Date.valueOf(end)
+        );
+
+
+
+
+
+
+
+        // ==========================
+        // SAVE CENTRE
+        // ==========================
+
+
+        boolean saved =
+                centreDAO.addCentre(
+                        centre
+                );
+
+
+
+
+
+
+        if(saved){
+
+
+
+            // ==========================
+            // SEND DATA TO SUCCESS PAGE
+            // ==========================
+
+
+            request.setAttribute(
+                    "created",
+                    true
+            );
+
+
+
+            request.setAttribute(
+                    "centreName",
+                    name
+            );
+
+
+
+            request.setAttribute(
+                    "username",
+                    username
+            );
+
+
+
+            request.setAttribute(
+                    "password",
+                    temporaryPassword
+            );
+
+
+
+            request.getRequestDispatcher(
+                    "/admin/pages/centre-created.jsp"
+            )
+            .forward(
+                    request,
+                    response
+            );
+
+
+
+
+        }
+        else{
+
+
+            request.setAttribute(
+                    "error",
+                    "Erreur création centre"
+            );
+
+
+
+            request.getRequestDispatcher(
+                    "/admin/pages/add-centre.jsp"
+            )
+            .forward(
+                    request,
+                    response
+            );
+
+
+
+        }
+
+
+
+
+
     }
-
-
-
-
 
 
 
@@ -314,9 +551,7 @@ public class CentreServlet extends HttpServlet {
     @Override
     public String getServletInfo(){
 
-
         return "Centre Management Servlet";
-
 
     }
 
