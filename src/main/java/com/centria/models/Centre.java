@@ -1,4 +1,4 @@
-package model;
+package com.centria.models;
 
 import java.sql.Date;
 import java.sql.Timestamp;

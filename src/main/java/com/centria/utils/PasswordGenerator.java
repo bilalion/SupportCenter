@@ -1,4 +1,4 @@
-package util;
+package com.centria.utils;
 
 
 import java.security.SecureRandom;

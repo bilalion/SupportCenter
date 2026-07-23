@@ -1,11 +1,11 @@
-package servlet;
+package com.centria.controllers;
 
 
-import dao.CentreDAO;
-import model.Centre;
+import com.centria.dao.CentreDAO;
+import com.centria.models.Centre;
 
-import util.PasswordGenerator;
-import util.PasswordUtil;
+import com.centria.utils.PasswordGenerator;
+import com.centria.utils.PasswordUtil;
 
 
 import java.io.IOException;
@@ -516,7 +516,7 @@ centre.setSubscriptionEnd(
 
 
             request.getRequestDispatcher(
-                    "/admin/pages/centre-created.jsp"
+                    "/admin/pages/fragments/centres/centre-created.jsp"
             )
             .forward(
                     request,

@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<%@page import="config.LanguageManager"%>
-<%@page import="model.Centre"%>
+<%@page import="com.centria.utils.LanguageManager"%>
+<%@page import="com.centria.models.Centre"%>
 <%@page import="java.util.List"%>
 <%@page import="java.text.SimpleDateFormat"%>
 
@@ -261,7 +261,7 @@
      ========================== -->
 
 
-<a href="<%=request.getContextPath()%>/admin/pages/add-centre.jsp"
+<a href="<%=request.getContextPath()%>/admin/pages/fragments/centres/add-centre.jsp"
    class="btn-primary btn-no-underline">
 
 

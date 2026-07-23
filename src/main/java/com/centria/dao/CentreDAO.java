@@ -1,9 +1,9 @@
-package dao;
+package com.centria.dao;
 
 
-import config.DatabaseConfig;
-import model.Centre;
-import util.PasswordUtil;
+import com.centria.config.DatabaseConfig;
+import com.centria.models.Centre;
+import com.centria.utils.PasswordUtil;
 
 
 import java.sql.Connection;

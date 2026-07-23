@@ -1,6 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="config.LanguageManager"%>
-
+<%@page import="com.centria.utils.LanguageManager"%>
 
 <div class="sidebar">
 

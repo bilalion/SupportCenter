@@ -1,4 +1,4 @@
-package com.idev.supportcenter;
+package com.centria.config;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;

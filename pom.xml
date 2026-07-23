@@ -10,16 +10,16 @@
     <modelVersion>4.0.0</modelVersion>
 
 
-    <groupId>com.idev</groupId>
+   <groupId>com.centria</groupId>
 
-    <artifactId>SupportCenter</artifactId>
+<artifactId>Centria</artifactId>
 
     <version>1.0-SNAPSHOT</version>
 
     <packaging>war</packaging>
 
 
-    <name>SupportCenter-1.0-SNAPSHOT</name>
+   <name>Centria-1.0-SNAPSHOT</name>
 
 
 
@@ -133,7 +133,7 @@
 
 
         <finalName>
-            SupportCenter
+           Centria
         </finalName>
 
 

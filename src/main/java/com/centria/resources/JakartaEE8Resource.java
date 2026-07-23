@@ -1,4 +1,4 @@
-package com.idev.supportcenter.resources;
+package com.centria.resources;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

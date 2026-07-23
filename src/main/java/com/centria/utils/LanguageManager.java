@@ -1,4 +1,4 @@
-package config;
+package com.centria.utils;
 
 
 import java.io.IOException;

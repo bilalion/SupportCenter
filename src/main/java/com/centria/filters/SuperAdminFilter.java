@@ -9,7 +9,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
 
-package filter;
+package com.centria.filters;
 
 import java.io.IOException;
 

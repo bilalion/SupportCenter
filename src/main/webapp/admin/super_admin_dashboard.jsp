@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="config.LanguageManager"%>
+<%@page import="com.centria.utils.LanguageManager"%>
 
 
 <%
@@ -155,25 +155,25 @@ if(section == null || section.isEmpty()){
 <%
 
 
-}else if("subscriptions".equals(section)){
+}else if("payments".equals(section)){
 
 
 %>
 
 
-    <jsp:include page="pages/subscriptions.jsp"/>
+    <jsp:include page="pages/payments.jsp"/>
 
 
 <%
 
 
-}else if("users".equals(section)){
+}else if("settings".equals(section)){
 
 
 %>
 
 
-    <jsp:include page="pages/users.jsp"/>
+    <jsp:include page="pages/settings.jsp"/>
 
 
 <%
