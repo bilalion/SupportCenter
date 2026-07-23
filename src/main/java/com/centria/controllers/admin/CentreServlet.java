@@ -1,4 +1,4 @@
-package com.centria.controllers;
+package com.centria.controllers.admin;
 
 
 import com.centria.dao.CentreDAO;

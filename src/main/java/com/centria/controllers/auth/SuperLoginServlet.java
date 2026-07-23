@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package com.centria.controllers;
+package com.centria.controllers.auth;
 
 
 import java.io.IOException;
