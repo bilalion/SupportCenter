@@ -98,7 +98,14 @@ public class CentreServlet extends HttpServlet {
                 break;
 
 
+case "status":
 
+    updateStatus(
+        request,
+        response
+    );
+
+    break;
 
             default:
 
@@ -279,13 +286,14 @@ public class CentreServlet extends HttpServlet {
 
 
 
-        request.getRequestDispatcher(
-                "/admin/pages/centres.jsp"
-        )
-        .forward(
-                request,
-                response
-        );
+ request.getRequestDispatcher(
+        "/admin/pages/centres.jsp"
+)
+.forward(
+        request,
+        response
+);
+    
 
 
     }
@@ -557,7 +565,83 @@ centre.setSubscriptionEnd(
         return "Centre Management Servlet";
 
     }
+private void updateStatus(
+        HttpServletRequest request,
+        HttpServletResponse response
+)
+throws IOException {
+
+
+    response.setContentType("application/json");
+    response.setCharacterEncoding("UTF-8");
 
 
 
-}
+    try{
+
+
+        int id = Integer.parseInt(
+                request.getParameter("id")
+        );
+
+
+
+        String status =
+                request.getParameter("status");
+
+
+
+        boolean updated =
+                centreDAO.updateStatus(
+                        id,
+                        status
+                );
+
+
+
+
+        if(updated){
+
+
+            response.getWriter().print(
+                "{"
+                + "\"success\":true,"
+                + "\"status\":\"" + status + "\""
+                + "}"
+            );
+
+
+        }
+        else{
+
+
+            response.getWriter().print(
+                "{"
+                + "\"success\":false"
+                + "}"
+            );
+
+
+        }
+
+
+
+    }
+    catch(Exception e){
+
+
+        e.printStackTrace();
+
+
+        response.getWriter().print(
+            "{"
+            + "\"success\":false,"
+            + "\"error\":\"server\""
+            + "}"
+        );
+
+
+    }
+
+
+}}

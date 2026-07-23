@@ -373,11 +373,6 @@ if(centres == null || centres.isEmpty()){
 
 
 <th>
-<%=LanguageManager.get("centers.username",session)%>
-</th>
-
-
-<th>
 <%=LanguageManager.get("centers.phone",session)%>
 </th>
 
@@ -455,11 +450,6 @@ if("ARCHIVED".equals(status)){
 
 
 
-String statusText =
-LanguageManager.get(
-        "centers."+status.toLowerCase(),
-        session
-);
 
 
 
@@ -519,15 +509,6 @@ LanguageManager.get(
 
 
 
-
-
-<!-- USERNAME -->
-
-<td>
-
-<%=centre.getUsername()%>
-
-</td>
 
 
 
@@ -628,26 +609,46 @@ if(centre.getSubscriptionEnd()!=null){
 
 
 
-
-
 <!-- STATUS -->
 
 <td>
 
 
-<span class="status-badge <%=statusClass%>">
+<select 
+    id="status_<%=centre.getId()%>"
+    class="status-select <%=statusClass%>"
+    data-id="<%=centre.getId()%>"
+    onchange="updateCentreStatus(this)">
 
 
-<%=statusText%>
+<option value="PENDING"
+<%= "PENDING".equals(status) ? "selected" : "" %>>
+<%=LanguageManager.get("centers.pending",session)%>
+</option>
 
 
-</span>
+<option value="ACTIVE"
+<%= "ACTIVE".equals(status) ? "selected" : "" %>>
+<%=LanguageManager.get("centers.active",session)%>
+</option>
+
+
+<option value="SUSPENDED"
+<%= "SUSPENDED".equals(status) ? "selected" : "" %>>
+<%=LanguageManager.get("centers.suspended",session)%>
+</option>
+
+
+<option value="ARCHIVED"
+<%= "ARCHIVED".equals(status) ? "selected" : "" %>>
+<%=LanguageManager.get("centers.archived",session)%>
+</option>
+
+
+</select>
 
 
 </td>
-
-
-
 
 
 
@@ -719,19 +720,9 @@ if(centre.getSubscriptionEnd()!=null){
 
 
 
-
-<!-- SUSPEND -->
-
-<a href="#"
-   class="action-btn action-stop"
-   title="<%=LanguageManager.get("centers.stop",session)%>">
-
-
-⏸
-
-
-</a>
-
+<!-- ==========================
+     CHANGE STATUS
+     ========================== -->
 
 
 

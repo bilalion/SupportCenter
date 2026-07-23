@@ -395,7 +395,7 @@ public class CentreDAO {
 
             ps.setString(
                     8,
-                    "ACTIVE"
+                    "PENDING"
             );
 
 

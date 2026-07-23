@@ -268,7 +268,107 @@ function activateCentreEvents(){
 
 
 
+// =====================================
+// UPDATE CENTRE STATUS AJAX
+// =====================================
 
+
+
+function updateCentreStatus(select){
+
+    let id =
+        select.getAttribute("data-id");
+
+
+    let status =
+        select.value;
+
+
+
+let url =
+    window.contextPath
+    +
+    "/CentreServlet?action=status"
+    +
+    "&ajax=true"
+    +
+    "&id="
+    +
+    id
+    +
+    "&status="
+    +
+    status;
+
+
+    fetch(url)
+
+
+
+    .then(response => response.json())
+
+
+
+    .then(data => {
+
+
+
+        if(data.success){
+
+
+
+            console.log(
+                "Status updated:",
+                data.status
+            );
+
+
+
+            // إعادة تحميل المراكز من database
+            select.classList.remove(
+    "status-pending",
+    "status-active",
+    "status-suspended",
+    "status-archived"
+);
+
+
+select.classList.add(
+    "status-" + status.toLowerCase()
+);
+
+
+
+        }
+        else{
+
+
+            alert(
+                "Erreur modification statut"
+            );
+
+
+        }
+
+
+
+    })
+
+
+
+    .catch(error => {
+
+
+        console.error(
+            "Status AJAX Error:",
+            error
+        );
+
+
+    });
+
+
+}
 
 // =====================================
 // INIT

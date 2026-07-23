@@ -1,12 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 package config;
 
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+
+import java.nio.charset.StandardCharsets;
+
 import java.util.Locale;
+import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
 import javax.servlet.http.HttpSession;
@@ -24,18 +27,90 @@ public class LanguageManager {
 
 
 
-    // الطريقة القديمة
+    private static ResourceBundle loadBundle(Locale locale){
+
+
+        ResourceBundle bundle = null;
+
+
+        String path =
+                "i18n/strings_" 
+                + locale.getLanguage()
+                + ".properties";
+
+
+
+        try(
+            InputStream input =
+            LanguageManager.class
+            .getClassLoader()
+            .getResourceAsStream(path)
+        ){
+
+
+            if(input == null){
+
+                return null;
+
+            }
+
+
+
+            Reader reader =
+                    new InputStreamReader(
+                            input,
+                            StandardCharsets.UTF_8
+                    );
+
+
+
+            bundle =
+                new PropertyResourceBundle(
+                        reader
+                );
+
+
+
+        }
+        catch(IOException e){
+
+            e.printStackTrace();
+
+        }
+
+
+
+        return bundle;
+
+    }
+
+
+
+
+
+
+
+
+
     public static String get(String key){
 
 
         ResourceBundle bundle =
-                ResourceBundle.getBundle(
-                        "i18n.strings",
-                        locale
-                );
+                loadBundle(locale);
 
 
-        return bundle.getString(key);
+
+        if(bundle == null){
+
+            return key;
+
+        }
+
+
+
+        return bundle.containsKey(key)
+                ? bundle.getString(key)
+                : key;
 
 
     }
@@ -47,7 +122,7 @@ public class LanguageManager {
 
 
 
-    // الطريقة الجديدة مع Session
+
     public static String get(
             String key,
             HttpSession session
@@ -55,32 +130,26 @@ public class LanguageManager {
 
 
 
-        String lang = "ar";
+        String lang="ar";
 
 
 
         if(session != null){
 
 
-
-            Object currentLang =
+            Object current =
                     session.getAttribute("lang");
 
 
-
-            if(currentLang != null){
-
+            if(current != null){
 
                 lang =
-                currentLang.toString();
-
+                current.toString();
 
             }
 
 
         }
-
-
 
 
 
@@ -91,18 +160,23 @@ public class LanguageManager {
 
 
 
-
         ResourceBundle bundle =
-                ResourceBundle.getBundle(
-                        "i18n.strings",
-                        currentLocale
-                );
+                loadBundle(currentLocale);
 
 
 
 
+        if(bundle == null){
 
-        return bundle.getString(key);
+            return key;
+
+        }
+
+
+
+        return bundle.containsKey(key)
+                ? bundle.getString(key)
+                : key;
 
 
 
@@ -124,6 +198,8 @@ public class LanguageManager {
 
 
     }
+
+
 
 
 
