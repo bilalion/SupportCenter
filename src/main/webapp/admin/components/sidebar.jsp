@@ -65,6 +65,11 @@
 
 
 
+        <!-- ==========================
+             HOME
+             ========================== -->
+
+
         <a href="javascript:void(0)"
            onclick="loadContent('accueil.jsp')">
 
@@ -84,8 +89,7 @@
 
 
         <!-- ==========================
-             CENTRES
-             تحميل من Servlet
+             CENTRES MANAGEMENT
              ========================== -->
 
 
@@ -107,41 +111,16 @@
 
 
 
-
-        <a href="#">
-
-
-            📅
-
-            <%= LanguageManager.get("dashboard.subscriptions", session) %>
+        <!-- ==========================
+             PAYMENTS MONITORING
+             ========================== -->
 
 
-        </a>
+        <a href="javascript:void(0)"
+           onclick="loadContent('payments.jsp')">
 
 
-
-
-
-
-        <a href="#">
-
-
-            👥
-
-            <%= LanguageManager.get("dashboard.users", session) %>
-
-
-        </a>
-
-
-
-
-
-
-        <a href="#">
-
-
-            💳
+            💰
 
             <%= LanguageManager.get("dashboard.payments", session) %>
 
@@ -153,12 +132,20 @@
 
 
 
-        <a href="#">
 
 
-            📊
+        <!-- ==========================
+             ARCHIVE
+             ========================== -->
 
-            <%= LanguageManager.get("dashboard.reports", session) %>
+
+        <a href="javascript:void(0)"
+           onclick="loadContent('archive.jsp')">
+
+
+            🗄️
+
+            <%= LanguageManager.get("dashboard.archive", session) %>
 
 
         </a>
@@ -168,7 +155,15 @@
 
 
 
-        <a href="#">
+
+
+        <!-- ==========================
+             SETTINGS
+             ========================== -->
+
+
+        <a href="javascript:void(0)"
+           onclick="loadContent('settings.jsp')">
 
 
             ⚙️
@@ -191,10 +186,17 @@
 
 
 
+    <!-- ==========================
+         LOGOUT
+         ========================== -->
+
+
     <a href="<%=request.getContextPath()%>/LogoutServlet"
        class="logout-btn">
 
 
+
+        🚪
 
         <%= LanguageManager.get("dashboard.logout", session) %>
 

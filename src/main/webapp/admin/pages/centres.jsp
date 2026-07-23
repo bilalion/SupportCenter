@@ -7,9 +7,9 @@
 
 
 
-<!-- ==========================
+<!-- =================================================
      HEADER
-     ========================== -->
+     ================================================= -->
 
 
 <div class="dashboard-header">
@@ -31,9 +31,11 @@
 
 
 
-<!-- ==========================
+
+
+<!-- =================================================
      TOOLBAR
-     ========================== -->
+     ================================================= -->
 
 
 <div class="card centres-toolbar">
@@ -54,7 +56,12 @@
 
 
 
-<!-- SEARCH -->
+
+
+<!-- ==========================
+     SEARCH
+     ========================== -->
+
 
 <div class="search-box">
 
@@ -64,7 +71,10 @@
        value="<%= request.getAttribute("search") != null 
                 ? request.getAttribute("search") 
                 : "" %>"
-       placeholder="<%=LanguageManager.get("centers.search.placeholder",session)%>">
+       placeholder="<%=LanguageManager.get(
+                    "centers.search.placeholder",
+                    session
+       )%>">
 
 
 </div>
@@ -75,50 +85,80 @@
 
 
 
-<!-- STATUS FILTER -->
 
 
-<select name="status" class="centre-select">
+<!-- ==========================
+     STATUS FILTER
+     ========================== -->
+
+
+<select name="status"
+        class="centre-select">
+
 
 
 <option value="ALL">
 
-<%=LanguageManager.get("centers.all",session)%>
+<%=LanguageManager.get(
+        "centers.all",
+        session
+)%>
 
 </option>
+
+
+
+
+
+<option value="PENDING">
+
+<%=LanguageManager.get(
+        "centers.pending",
+        session
+)%>
+
+</option>
+
+
 
 
 
 <option value="ACTIVE">
 
-<%=LanguageManager.get("centers.active",session)%>
+<%=LanguageManager.get(
+        "centers.active",
+        session
+)%>
 
 </option>
+
+
 
 
 
 <option value="SUSPENDED">
 
-<%=LanguageManager.get("centers.suspended",session)%>
+<%=LanguageManager.get(
+        "centers.suspended",
+        session
+)%>
 
 </option>
 
 
 
-<option value="INACTIVE">
-
-<%=LanguageManager.get("centers.inactive",session)%>
-
-</option>
-
-<option value="PENDING">
-<%=LanguageManager.get("centers.pending",session)%>
-</option>
 
 
 <option value="ARCHIVED">
-<%=LanguageManager.get("centers.archived",session)%>
+
+<%=LanguageManager.get(
+        "centers.archived",
+        session
+)%>
+
 </option>
+
+
 
 
 </select>
@@ -129,37 +169,58 @@
 
 
 
-<!-- ORDER -->
 
 
-<select name="order" class="centre-select">
+<!-- ==========================
+     ORDER
+     ========================== -->
+
+
+<select name="order"
+        class="centre-select">
+
 
 
 <option value="NEW">
 
-<%=LanguageManager.get("centers.newest",session)%>
+<%=LanguageManager.get(
+        "centers.newest",
+        session
+)%>
 
 </option>
+
 
 
 
 <option value="OLD">
 
-<%=LanguageManager.get("centers.oldest",session)%>
+<%=LanguageManager.get(
+        "centers.oldest",
+        session
+)%>
 
 </option>
+
 
 
 
 <option value="NAME">
 
-<%=LanguageManager.get("centers.name.asc",session)%>
+<%=LanguageManager.get(
+        "centers.name.asc",
+        session
+)%>
 
 </option>
 
 
 
+
 </select>
+
+
+
 
 
 
@@ -172,10 +233,14 @@
 
 🔎
 
-<%=LanguageManager.get("centers.search",session)%>
+<%=LanguageManager.get(
+        "centers.search",
+        session
+)%>
 
 
 </button>
+
 
 
 
@@ -188,33 +253,38 @@
 
 
 
-<!-- ADD -->
+
+
+
+<!-- ==========================
+     ADD CENTRE
+     ========================== -->
 
 
 <a href="<%=request.getContextPath()%>/admin/pages/add-centre.jsp"
-   class="btn-primary">
+   class="btn-primary btn-no-underline">
 
 
 ➕
 
-<%=LanguageManager.get("centers.add",session)%>
+<%=LanguageManager.get(
+        "centers.add",
+        session
+)%>
 
 
 </a>
 
 
+
+
+
+
 </div>
 
-
-
-
-
-
-
-
-<!-- ==========================
+<!-- =================================================
      TABLE CARD
-     ========================== -->
+     ================================================= -->
 
 
 <div class="card">
@@ -223,10 +293,12 @@
 
 <h3>
 
-<%=LanguageManager.get("centers.list.title",session)%>
+<%=LanguageManager.get(
+        "centers.list.title",
+        session
+)%>
 
 </h3>
-
 
 
 
@@ -252,7 +324,10 @@ if(centres == null || centres.isEmpty()){
 
 <p>
 
-<%=LanguageManager.get("centers.empty",session)%>
+<%=LanguageManager.get(
+        "centers.empty",
+        session
+)%>
 
 </p>
 
@@ -263,7 +338,6 @@ if(centres == null || centres.isEmpty()){
 
 
 %>
-
 
 
 
@@ -283,12 +357,9 @@ if(centres == null || centres.isEmpty()){
 <tr>
 
 
-
 <th>
 <%=LanguageManager.get("centers.id",session)%>
 </th>
-
-
 
 
 <th>
@@ -296,13 +367,9 @@ if(centres == null || centres.isEmpty()){
 </th>
 
 
-
-
 <th>
 <%=LanguageManager.get("centers.owner",session)%>
 </th>
-
-
 
 
 <th>
@@ -310,13 +377,9 @@ if(centres == null || centres.isEmpty()){
 </th>
 
 
-
-
 <th>
 <%=LanguageManager.get("centers.phone",session)%>
 </th>
-
-
 
 
 <th>
@@ -324,13 +387,9 @@ if(centres == null || centres.isEmpty()){
 </th>
 
 
-
-
 <th>
 <%=LanguageManager.get("centers.subscription.end",session)%>
 </th>
-
-
 
 
 <th>
@@ -338,13 +397,9 @@ if(centres == null || centres.isEmpty()){
 </th>
 
 
-
-
 <th>
 <%=LanguageManager.get("centers.actions",session)%>
 </th>
-
-
 
 
 </tr>
@@ -352,7 +407,13 @@ if(centres == null || centres.isEmpty()){
 
 </thead>
 
+
+
+
+
 <tbody>
+
+
 
 
 
@@ -361,13 +422,21 @@ if(centres == null || centres.isEmpty()){
 for(Centre centre : centres){
 
 
-
 String status =
 centre.getStatus();
 
 
 
-String statusClass = "status-active";
+String statusClass="status-pending";
+
+
+
+if("ACTIVE".equals(status)){
+
+    statusClass="status-active";
+
+}
+
 
 
 if("SUSPENDED".equals(status)){
@@ -376,19 +445,6 @@ if("SUSPENDED".equals(status)){
 
 }
 
-
-if("INACTIVE".equals(status)){
-
-    statusClass="status-inactive";
-
-}
-
-
-if("PENDING".equals(status)){
-
-    statusClass="status-pending";
-
-}
 
 
 if("ARCHIVED".equals(status)){
@@ -399,7 +455,16 @@ if("ARCHIVED".equals(status)){
 
 
 
+String statusText =
+LanguageManager.get(
+        "centers."+status.toLowerCase(),
+        session
+);
+
+
+
 %>
+
 
 
 
@@ -417,6 +482,8 @@ if("ARCHIVED".equals(status)){
 <%=centre.getId()%>
 
 </td>
+
+
 
 
 
@@ -482,7 +549,7 @@ if("ARCHIVED".equals(status)){
 
 
 
-<!-- START SUBSCRIPTION -->
+<!-- START -->
 
 <td>
 
@@ -522,7 +589,7 @@ if(centre.getSubscriptionStart()!=null){
 
 
 
-<!-- END SUBSCRIPTION -->
+<!-- END -->
 
 <td>
 
@@ -562,6 +629,7 @@ if(centre.getSubscriptionEnd()!=null){
 
 
 
+
 <!-- STATUS -->
 
 <td>
@@ -570,13 +638,15 @@ if(centre.getSubscriptionEnd()!=null){
 <span class="status-badge <%=statusClass%>">
 
 
-<%=status%>
+<%=statusText%>
 
 
 </span>
 
 
 </td>
+
+
 
 
 
@@ -595,6 +665,7 @@ if(centre.getSubscriptionEnd()!=null){
 
 
 
+
 <!-- VIEW -->
 
 <a href="#"
@@ -608,7 +679,7 @@ if(centre.getSubscriptionEnd()!=null){
 </a>
 
 
-  
+
 
 
 
@@ -635,7 +706,7 @@ if(centre.getSubscriptionEnd()!=null){
 
 <a href="#"
    class="action-btn action-renew"
-   title="Reset Password">
+   title="<%=LanguageManager.get("centers.reset.password",session)%>">
 
 
 🔑
@@ -649,7 +720,7 @@ if(centre.getSubscriptionEnd()!=null){
 
 
 
-<!-- STOP -->
+<!-- SUSPEND -->
 
 <a href="#"
    class="action-btn action-stop"
@@ -666,10 +737,12 @@ if(centre.getSubscriptionEnd()!=null){
 
 
 
+
 </div>
 
 
 </td>
+
 
 
 

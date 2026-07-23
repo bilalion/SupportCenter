@@ -2,9 +2,9 @@
 <%@page import="config.LanguageManager"%>
 
 
-<!-- ==========================
+<!-- =================================================
      DASHBOARD HEADER
-     ========================== -->
+     ================================================= -->
 
 <div class="dashboard-header">
 
@@ -32,19 +32,17 @@
 
 
 
-<!-- ==========================
-     STATISTICS GRID
-     ========================== -->
-
+<!-- =================================================
+     STATISTICS
+     ================================================= -->
 
 <div class="stats-container">
 
 
 
-    <!-- ==========================
+    <!-- =================================================
          TOTAL CENTERS
-         ========================== -->
-
+         ================================================= -->
 
     <div class="card dashboard-card blue-card">
 
@@ -87,10 +85,9 @@
 
 
 
-    <!-- ==========================
+    <!-- =================================================
          ACTIVE CENTERS
-         ========================== -->
-
+         ================================================= -->
 
     <div class="card dashboard-card green-card">
 
@@ -134,17 +131,16 @@
 
 
 
-    <!-- ==========================
-         SUBSCRIPTIONS
-         ========================== -->
-
+    <!-- =================================================
+         PENDING CENTERS
+         ================================================= -->
 
     <div class="card dashboard-card orange-card">
 
 
         <div class="card-icon">
 
-            📅
+            ⏳
 
         </div>
 
@@ -155,7 +151,7 @@
 
             <h3>
 
-                <%= LanguageManager.get("dashboard.total.subscriptions", session) %>
+                <%= LanguageManager.get("dashboard.pending.centers", session) %>
 
             </h3>
 
@@ -181,12 +177,11 @@
 
 
 
-    <!-- ==========================
-         REVENUE
-         ========================== -->
+    <!-- =================================================
+         UNPAID PAYMENTS
+         ================================================= -->
 
-
-    <div class="card dashboard-card purple-card">
+    <div class="card dashboard-card red-card">
 
 
         <div class="card-icon">
@@ -202,7 +197,7 @@
 
             <h3>
 
-                <%= LanguageManager.get("dashboard.total.revenue", session) %>
+                <%= LanguageManager.get("dashboard.unpaid.centers", session) %>
 
             </h3>
 
@@ -210,7 +205,7 @@
 
             <strong>
 
-                0 MAD
+                0
 
             </strong>
 
@@ -236,10 +231,9 @@
 
 
 
-<!-- ==========================
-     WELCOME SECTION
-     ========================== -->
-
+<!-- =================================================
+     WELCOME CARD
+     ================================================= -->
 
 <div class="card welcome-card">
 
