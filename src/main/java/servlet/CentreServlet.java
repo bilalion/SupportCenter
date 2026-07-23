@@ -405,48 +405,51 @@ public class CentreServlet extends HttpServlet {
 
 
 
-        // ==========================
-        // SUBSCRIPTION DURATION
-        // ==========================
+
+// ==========================
+// SUBSCRIPTION DURATION
+// ==========================
+
+int months = 1; // الافتراضي شهر واحد
 
 
-        int months = 3;
+if("3".equals(duration)){
 
+    months = 3;
 
-
-        if("6".equals(duration)){
-
-            months = 6;
-
-        }
-
-
-
-        if("12".equals(duration)){
-
-            months = 12;
-
-        }
+}
 
 
 
+if("6".equals(duration)){
+
+    months = 6;
+
+}
 
 
 
-        LocalDate end =
-                LocalDate.parse(start)
-                .plusMonths(months);
+if("12".equals(duration)){
 
+    months = 12;
+
+}
 
 
 
 
 
-        centre.setSubscriptionEnd(
-                Date.valueOf(end)
-        );
+LocalDate end =
+        LocalDate.parse(start)
+        .plusMonths(months);
 
 
+
+
+
+centre.setSubscriptionEnd(
+        Date.valueOf(end)
+);
 
 
 

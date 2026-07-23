@@ -449,6 +449,16 @@ session
 
 <select name="duration">
 
+ <option value="1">
+
+<%=LanguageManager.get(
+"centers.duration.1",
+session
+)%>
+
+</option>
+
+    
 
 <option value="3">
 
@@ -504,18 +514,14 @@ session
 
 
 <a class="btn-back"
-
-href="<%=request.getContextPath()%>/CentreServlet?action=list">
-
+   href="<%=request.getContextPath()%>/admin/super_admin_dashboard.jsp?section=centres">
 
 <%=LanguageManager.get(
 "centers.back",
 session
 )%>
 
-
 </a>
-
 
 
 
