@@ -111,6 +111,15 @@
 
 </option>
 
+<option value="PENDING">
+<%=LanguageManager.get("centers.pending",session)%>
+</option>
+
+
+<option value="ARCHIVED">
+<%=LanguageManager.get("centers.archived",session)%>
+</option>
+
 
 </select>
 
@@ -358,26 +367,33 @@ centre.getStatus();
 
 
 
-String statusClass =
-"status-active";
-
+String statusClass = "status-active";
 
 
 if("SUSPENDED".equals(status)){
 
-
     statusClass="status-suspended";
-
 
 }
 
 
-
 if("INACTIVE".equals(status)){
-
 
     statusClass="status-inactive";
 
+}
+
+
+if("PENDING".equals(status)){
+
+    statusClass="status-pending";
+
+}
+
+
+if("ARCHIVED".equals(status)){
+
+    statusClass="status-archived";
 
 }
 

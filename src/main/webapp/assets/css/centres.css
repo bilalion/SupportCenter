@@ -553,7 +553,84 @@ html[dir="rtl"] .centres-filter-form select{
 
 
 
+/* ==========================
+   STATUS COLORS
+   ========================== */
 
+
+.status-badge{
+
+    padding:6px 14px;
+
+    border-radius:20px;
+
+    font-weight:bold;
+
+    font-size:13px;
+
+    display:inline-block;
+
+}
+
+
+
+/* ACTIVE */
+
+.status-active{
+
+    background:#dcfce7;
+
+    color:#166534;
+
+}
+
+
+
+/* SUSPENDED */
+
+.status-suspended{
+
+    background:#fee2e2;
+
+    color:#991b1b;
+
+}
+
+
+
+/* INACTIVE */
+
+.status-inactive{
+
+    background:#e5e7eb;
+
+    color:#374151;
+
+}
+
+
+
+/* PENDING PAYMENT */
+
+.status-pending{
+
+    background:#fef3c7;
+
+    color:#92400e;
+
+}
+
+
+
+/* ARCHIVED */
+
+.status-archived{
+
+    background:#dbeafe;
+
+    color:#1e40af;
+
+}
 
 
 /* ==========================
@@ -1017,3 +1094,12 @@ html[dir="rtl"] .centre-select{
 
 
 }
+
+.btn-primary {
+    text-decoration: none;
+}
+
+.centres-toolbar a.btn-primary {
+    text-decoration: none;
+}
+
