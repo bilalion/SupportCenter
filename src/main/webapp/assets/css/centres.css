@@ -9,17 +9,13 @@
    CENTRES TOOLBAR
    ========================== */
 
-
 .centres-toolbar{
 
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
 
     margin-bottom:25px;
-
     gap:20px;
 
 }
@@ -29,12 +25,9 @@
 .centres-toolbar h3{
 
     font-size:22px;
-
     color:#1e293b;
 
 }
-
-
 
 
 
@@ -46,69 +39,12 @@
 .centres-filter-form{
 
     display:flex;
-
     align-items:center;
 
     gap:15px;
-
     flex-wrap:wrap;
 
 }
-
-
-
-
-
-
-
-/* ==========================
-   PRIMARY BUTTON
-   ========================== */
-
-
-.btn-primary{
-
-    border:none;
-
-    cursor:pointer;
-
-    padding:12px 22px;
-
-    border-radius:12px;
-
-    background:
-
-    linear-gradient(
-        135deg,
-        #2563eb,
-        #1d4ed8
-    );
-
-    color:white;
-
-    font-weight:700;
-
-    font-size:14px;
-
-    transition:.3s;
-
-}
-
-
-
-.btn-primary:hover{
-
-    transform:translateY(-3px);
-
-    box-shadow:
-
-    0 8px 18px rgba(37,99,235,.35);
-
-}
-
-
-
-
 
 
 
@@ -120,10 +56,7 @@
 .search-box{
 
     display:flex;
-
     align-items:center;
-
-    gap:10px;
 
     background:#f8fafc;
 
@@ -133,13 +66,25 @@
 
     border-radius:12px;
 
+    transition:.3s;
+
 }
 
 
 
+.search-box:focus-within{
+
+    border-color:#2563eb;
+
+    box-shadow:
+    0 0 0 3px rgba(37,99,235,.12);
+
+}
+
 
 
 .search-box input{
+
 
     border:none;
 
@@ -151,9 +96,10 @@
 
     font-size:14px;
 
+    color:#334155;
+
+
 }
-
-
 
 
 
@@ -165,16 +111,12 @@
 
 
 
-
-
-
-
 /* ==========================
-   BEAUTIFUL SELECT FILTERS
+   FILTER SELECTS
    ========================== */
 
 
-.centres-filter-form select{
+.centre-select{
 
 
     appearance:none;
@@ -182,12 +124,10 @@
     -webkit-appearance:none;
 
 
-    min-width:160px;
+    width:170px;
 
 
-    padding:
-
-    12px 42px 12px 18px;
+    padding:12px 42px 12px 18px;
 
 
     border-radius:12px;
@@ -195,7 +135,7 @@
 
     border:
 
-    1px solid #dbe3ef;
+    1px solid #cbd5e1;
 
 
     background-color:white;
@@ -241,12 +181,14 @@
 
 
     calc(100% - 18px) 50%,
+
     calc(100% - 12px) 50%;
 
 
     background-size:
 
     6px 6px,
+
     6px 6px;
 
 
@@ -258,8 +200,7 @@
 
 
 
-
-.centres-filter-form select:hover{
+.centre-select:hover{
 
 
     border-color:#2563eb;
@@ -274,9 +215,7 @@
 
 
 
-
-
-.centres-filter-form select:focus{
+.centre-select:focus{
 
 
     border-color:#2563eb;
@@ -292,12 +231,12 @@
 
 
 
+/* ==========================
+   RTL SELECT
+   ========================== */
 
 
-/* RTL SELECT */
-
-
-html[dir="rtl"] .centres-filter-form select{
+html[dir="rtl"] .centre-select{
 
 
     padding:
@@ -305,20 +244,107 @@ html[dir="rtl"] .centres-filter-form select{
     12px 18px 12px 42px;
 
 
-
     background-position:
 
 
-    18px 50%;
+    18px 50%,
+
+    24px 50%;
 
 
 }
 
 
 
+/* ==========================
+   PRIMARY BUTTON
+   ========================== */
+
+
+.btn-primary{
+
+
+    border:none;
+
+    cursor:pointer;
+
+
+    padding:
+
+    12px 22px;
+
+
+    border-radius:12px;
+
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #2563eb,
+        #1d4ed8
+    );
+
+
+    color:white;
+
+
+    font-weight:700;
+
+
+    font-size:14px;
+
+
+    transition:.3s;
+
+
+    text-decoration:none;
+
+
+    display:inline-flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    gap:8px;
+
+
+}
 
 
 
+.btn-primary:hover{
+
+
+    transform:translateY(-3px);
+
+
+    box-shadow:
+
+    0 8px 18px rgba(37,99,235,.35);
+
+
+}
+
+
+
+.btn-no-underline{
+
+    text-decoration:none;
+
+}
+
+
+
+.centres-toolbar a.btn-primary{
+
+    text-decoration:none;
+
+}
 
 /* ==========================
    TABLE CONTAINER
@@ -337,26 +363,30 @@ html[dir="rtl"] .centres-filter-form select{
 
 
 
-
-
 /* ==========================
-   TABLE
+   CENTRES TABLE
    ========================== */
 
 
 .centers-table{
 
+
     width:100%;
 
     min-width:1100px;
 
+
     border-collapse:collapse;
+
 
     background:white;
 
+
     border-radius:15px;
 
+
     overflow:hidden;
+
 
 }
 
@@ -364,8 +394,8 @@ html[dir="rtl"] .centres-filter-form select{
 
 
 
-
 .centers-table thead{
+
 
     background:
 
@@ -374,6 +404,7 @@ html[dir="rtl"] .centres-filter-form select{
         #1e293b,
         #334155
     );
+
 
 }
 
@@ -386,16 +417,20 @@ html[dir="rtl"] .centres-filter-form select{
 
     color:white;
 
+
     padding:14px 12px;
+
 
     font-size:13px;
 
+
     font-weight:700;
+
 
     white-space:nowrap;
 
-}
 
+}
 
 
 
@@ -406,18 +441,22 @@ html[dir="rtl"] .centres-filter-form select{
 
     padding:13px 12px;
 
+
     text-align:center;
+
 
     color:#475569;
 
+
     font-size:14px;
+
 
     border-bottom:
 
     1px solid #e2e8f0;
 
-}
 
+}
 
 
 
@@ -430,7 +469,6 @@ html[dir="rtl"] .centres-filter-form select{
 
 
 }
-
 
 
 
@@ -462,48 +500,96 @@ html[dir="rtl"] .centres-filter-form select{
 
 
 
-/* Subscription Dates */
-
-
-.centers-table td:nth-child(6),
-.centers-table td:nth-child(7){
-
-
-    white-space:nowrap;
-
-
-}
-
-
-
-
-
-
-
 /* ==========================
-   STATUS BADGES
+   STATUS SELECT TABLE
    ========================== */
 
 
-.status-badge{
+.status-select{
 
 
-    display:inline-block;
+    appearance:none;
+
+    -webkit-appearance:none;
 
 
-    padding:6px 15px;
+    width:145px;
 
 
-    border-radius:30px;
+    padding:
+
+    10px 38px 10px 15px;
 
 
-    font-size:12px;
+    border-radius:25px;
+
+
+    border:1px solid transparent;
+
+
+    font-size:13px;
 
 
     font-weight:700;
 
 
+    cursor:pointer;
+
+
+    outline:none;
+
+
+    transition:.3s;
+
+
+    text-align:center;
+
+
+    background-repeat:no-repeat;
+
+
+
+    background-image:
+
+    linear-gradient(
+        45deg,
+        transparent 50%,
+        currentColor 50%
+    ),
+
+
+    linear-gradient(
+        135deg,
+        currentColor 50%,
+        transparent 50%
+    );
+
+
+
+    background-position:
+
+
+    calc(100% - 18px) 50%,
+
+
+    calc(100% - 12px) 50%;
+
+
+
+    background-size:
+
+
+    6px 6px,
+
+    6px 6px;
+
+
+
 }
+
+
+
+
 
 
 /* ==========================
@@ -511,8 +597,9 @@ html[dir="rtl"] .centres-filter-form select{
    ========================== */
 
 
+/* ACTIVE */
 
-.status-active{
+.status-select.status-active{
 
 
     background:#dcfce7;
@@ -521,19 +608,7 @@ html[dir="rtl"] .centres-filter-form select{
     color:#166534;
 
 
-}
-
-
-
-
-
-.status-inactive{
-
-
-    background:#fee2e2;
-
-
-    color:#991b1b;
+    border-color:#86efac;
 
 
 }
@@ -542,7 +617,9 @@ html[dir="rtl"] .centres-filter-form select{
 
 
 
-.status-suspended{
+/* PENDING */
+
+.status-select.status-pending{
 
 
     background:#fef3c7;
@@ -551,113 +628,403 @@ html[dir="rtl"] .centres-filter-form select{
     color:#92400e;
 
 
-}
+    border-color:#fcd34d;
 
-
-
-
-
-
-.status-badge{
-
-    padding:6px 14px;
-
-    border-radius:20px;
-
-    font-weight:700;
-
-    font-size:13px;
-
-    display:inline-block;
-
-    min-width:90px;
-
-    text-align:center;
-
-    letter-spacing:.3px;
 
 }
 
 
-
-/* ACTIVE */
-
-.status-active{
-
-    background:#dcfce7;
-
-    color:#166534;
-
-}
 
 
 
 /* SUSPENDED */
 
-.status-suspended{
+.status-select.status-suspended{
+
 
     background:#fee2e2;
 
+
     color:#991b1b;
 
-}
 
+    border-color:#fca5a5;
 
-
-/* INACTIVE */
-
-.status-inactive{
-
-    background:#e5e7eb;
-
-    color:#374151;
 
 }
 
 
-
-/* PENDING PAYMENT */
-
-.status-pending{
-
-    background:#fef3c7;
-
-    color:#92400e;
-
-}
 
 
 
 /* ARCHIVED */
 
-.status-archived{
+.status-select.status-archived{
+
 
     background:#dbeafe;
 
+
     color:#1e40af;
 
+
 }
+
+
+
+
+
+.status-select:hover{
+
+
+    transform:translateY(-2px);
+
+
+    box-shadow:
+
+    0 5px 12px rgba(0,0,0,.12);
+
+
+}
+
+
+
+
+
+.status-select:focus{
+
+
+    box-shadow:
+
+    0 0 0 3px rgba(37,99,235,.20);
+
+
+}
+
+
+
+
+
+
+
+/* ==========================
+   RTL STATUS SELECT
+   ========================== */
+
+
+html[dir="rtl"] .status-select{
+
+
+    padding:
+
+    10px 15px 10px 38px;
+
+
+
+    background-position:
+
+
+    18px 50%,
+
+
+    24px 50%;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================
+   STATUS BADGES (GENERAL)
+   ========================== */
+
+
+.status-badge{
+
+
+    display:inline-block;
+
+
+    padding:6px 14px;
+
+
+    border-radius:20px;
+
+
+    font-weight:700;
+
+
+    font-size:13px;
+
+
+    min-width:90px;
+
+
+    text-align:center;
+
+
+}
+
+
+
+/* ACTIVE BADGE */
+
+.status-badge.status-active{
+
+
+    background:#dcfce7;
+
+
+    color:#166534;
+
+
+}
+
+
+
+/* PENDING BADGE */
+
+.status-badge.status-pending{
+
+
+    background:#fef3c7;
+
+
+    color:#92400e;
+
+
+}
+
+
+
+/* SUSPENDED BADGE */
+
+.status-badge.status-suspended{
+
+
+    background:#fee2e2;
+
+
+    color:#991b1b;
+
+
+}
+
+
+
+/* ARCHIVED BADGE */
+
+.status-badge.status-archived{
+
+
+    background:#dbeafe;
+
+
+    color:#1e40af;
+
+
+}
+
+/* ==========================
+   STATUS SELECT IN TABLE
+   ========================== */
+
+
+.status-select{
+
+    appearance:none;
+    -webkit-appearance:none;
+
+    width:140px;
+
+    padding:10px 38px 10px 15px;
+
+    border-radius:25px;
+
+    border:1px solid transparent;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    outline:none;
+
+    transition:.3s;
+
+    text-align:center;
+
+
+    background-image:
+
+    linear-gradient(
+        45deg,
+        transparent 50%,
+        currentColor 50%
+    ),
+
+    linear-gradient(
+        135deg,
+        currentColor 50%,
+        transparent 50%
+    );
+
+
+    background-position:
+
+    calc(100% - 18px) 50%,
+    calc(100% - 12px) 50%;
+
+
+    background-size:
+
+    6px 6px,
+    6px 6px;
+
+
+    background-repeat:no-repeat;
+
+}
+
+
+
+/* ==========================
+   STATUS COLORS
+   ========================== */
+
+
+.status-select.status-active{
+
+    background-color:#dcfce7;
+
+    color:#166534;
+
+    border-color:#86efac;
+
+}
+
+
+
+
+.status-select.status-pending{
+
+    background-color:#fef3c7;
+
+    color:#92400e;
+
+    border-color:#fcd34d;
+
+}
+
+
+
+
+.status-select.status-suspended{
+
+    background-color:#fee2e2;
+
+    color:#991b1b;
+
+    border-color:#fca5a5;
+
+}
+
+
+
+
+.status-select.status-archived{
+
+    background-color:#dbeafe;
+
+    color:#1e40af;
+
+    border-color:#93c5fd;
+
+}
+
+
+
+
+
+/* ==========================
+   STATUS SELECT EFFECT
+   ========================== */
+
+
+.status-select:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+
+    0 5px 12px rgba(0,0,0,.12);
+
+}
+
+
+
+
+
+.status-select:focus{
+
+    box-shadow:
+
+    0 0 0 3px rgba(37,99,235,.20);
+
+}
+
+
+
+
+
+
+/* ==========================
+   RTL STATUS SELECT
+   ========================== */
+
+
+html[dir="rtl"] .status-select{
+
+
+    padding:
+
+    10px 15px 10px 38px;
+
+
+
+    background-position:
+
+    18px 50%,
+    24px 50%;
+
+
+}
+
+
+
+
+
 
 
 /* ==========================
    ACTION BUTTONS
    ========================== */
 
- 
-.actions{
 
+.actions{
 
     display:flex;
 
-
     justify-content:center;
 
-
-    gap:7px;
-
+    gap:8px;
 
 }
-
 
 
 
@@ -665,36 +1032,25 @@ html[dir="rtl"] .centres-filter-form select{
 
 .action-btn{
 
+    width:36px;
 
-    width:34px;
-
-
-    height:34px;
-
+    height:36px;
 
     border-radius:10px;
 
-
     display:flex;
-
 
     justify-content:center;
 
-
     align-items:center;
-
 
     color:white;
 
-
     text-decoration:none;
 
-
-    font-size:14px;
-
+    font-size:15px;
 
     transition:.3s;
-
 
 }
 
@@ -702,12 +1058,9 @@ html[dir="rtl"] .centres-filter-form select{
 
 
 
-
 .action-btn:hover{
 
-
     transform:translateY(-3px);
-
 
 }
 
@@ -717,9 +1070,7 @@ html[dir="rtl"] .centres-filter-form select{
 
 .action-view{
 
-
     background:#0ea5e9;
-
 
 }
 
@@ -729,21 +1080,7 @@ html[dir="rtl"] .centres-filter-form select{
 
 .action-edit{
 
-
     background:#2563eb;
-
-
-}
-
-
-
-
-
-.action-stop{
-
-
-    background:#ef4444;
-
 
 }
 
@@ -753,9 +1090,7 @@ html[dir="rtl"] .centres-filter-form select{
 
 .action-renew{
 
-
     background:#16a34a;
-
 
 }
 
@@ -765,9 +1100,17 @@ html[dir="rtl"] .centres-filter-form select{
 
 .action-password{
 
-
     background:#9333ea;
 
+}
+
+
+
+
+
+.action-stop{
+
+    background:#ef4444;
 
 }
 
@@ -809,7 +1152,7 @@ html[dir="rtl"] .centres-filter-form select{
 
 
 /* ==========================
-   RTL
+   RTL / LTR
    ========================== */
 
 
@@ -818,9 +1161,7 @@ html[dir="rtl"] .centres-toolbar{
 
     flex-direction:row-reverse;
 
-
 }
-
 
 
 
@@ -830,9 +1171,7 @@ html[dir="rtl"] .centres-filter-form{
 
     flex-direction:row-reverse;
 
-
 }
-
 
 
 
@@ -842,18 +1181,10 @@ html[dir="rtl"] .search-box input{
 
     text-align:right;
 
-
 }
 
 
 
-
-
-
-
-/* ==========================
-   LTR
-   ========================== */
 
 
 html[dir="ltr"] .centres-toolbar{
@@ -861,9 +1192,7 @@ html[dir="ltr"] .centres-toolbar{
 
     flex-direction:row;
 
-
 }
-
 
 
 
@@ -873,9 +1202,7 @@ html[dir="ltr"] .centres-filter-form{
 
     flex-direction:row;
 
-
 }
-
 
 
 
@@ -885,8 +1212,8 @@ html[dir="ltr"] .search-box input{
 
     text-align:left;
 
-
 }
+
 
 
 
@@ -904,15 +1231,11 @@ html[dir="ltr"] .search-box input{
 
     .centres-toolbar{
 
-
         flex-direction:column;
-
 
         align-items:stretch;
 
-
     }
-
 
 
 
@@ -930,11 +1253,11 @@ html[dir="ltr"] .search-box input{
 
 
 
-    .centres-filter-form select{
+    .centre-select,
+    .status-select{
 
 
         width:100%;
-
 
     }
 
@@ -952,7 +1275,6 @@ html[dir="ltr"] .search-box input{
 
 
 
-
     .search-box input:focus{
 
 
@@ -963,149 +1285,12 @@ html[dir="ltr"] .search-box input{
 
 
 
-
     .actions{
 
 
         flex-wrap:wrap;
 
-
     }
 
 
-
 }
-
-/* ==========================
-   CENTRES CUSTOM SELECT
-   ========================== */
-
-
-.centre-select{
-
-
-    appearance:none;
-
-    -webkit-appearance:none;
-
-
-    width:170px;
-
-
-    padding:12px 40px 12px 15px;
-
-
-    border-radius:12px;
-
-
-    border:1px solid #cbd5e1;
-
-
-    background:white;
-
-
-    color:#334155;
-
-
-    font-size:14px;
-
-
-    font-weight:600;
-
-
-    cursor:pointer;
-
-
-    outline:none;
-
-
-    background-image:
-
-    linear-gradient(
-        45deg,
-        transparent 50%,
-        #2563eb 50%
-    ),
-
-    linear-gradient(
-        135deg,
-        #2563eb 50%,
-        transparent 50%
-    );
-
-
-    background-position:
-
-    calc(100% - 18px) 50%,
-    calc(100% - 12px) 50%;
-
-
-    background-size:
-
-    6px 6px;
-
-
-    background-repeat:no-repeat;
-
-
-}
-
-
-
-
-.centre-select:hover{
-
-
-    border-color:#2563eb;
-
-
-}
-
-
-
-
-
-.centre-select:focus{
-
-
-    border-color:#2563eb;
-
-
-    box-shadow:
-
-    0 0 0 3px rgba(37,99,235,.15);
-
-
-}
-
-
-
-
-
-
-/* Arabic */
-
-html[dir="rtl"] .centre-select{
-
-
-    padding:
-
-    12px 15px 12px 40px;
-
-
-    background-position:
-
-
-    18px 50%;
-
-
-}
-
-.btn-primary {
-    text-decoration: none;
-}
-
-.centres-toolbar a.btn-primary {
-    text-decoration: none;
-}
-
