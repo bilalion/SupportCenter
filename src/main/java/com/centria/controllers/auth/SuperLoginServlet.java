@@ -3,7 +3,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
+
+/*
+ * Centria
+ * Super Admin Authentication Controller
+ *
+ * Module : Login
+ * Author : Chentouf Bilal
+ *
+ * Description:
+ * Handles Super Admin login process.
+ * - Checks username and password
+ * - Creates admin session
+ * - Keeps selected language
+ * - Redirects to dashboard
+ */
+
+
 package com.centria.controllers.auth;
+
 
 
 import java.io.IOException;
@@ -15,18 +33,26 @@ import java.sql.ResultSet;
 import com.centria.utils.DBConnection;
 
 import javax.servlet.ServletException;
+
 import javax.servlet.annotation.WebServlet;
 
 import javax.servlet.http.HttpServlet;
+
 import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpServletResponse;
+
 import javax.servlet.http.HttpSession;
+
+
 
 
 
 @WebServlet("/SuperLoginServlet")
 
 public class SuperLoginServlet extends HttpServlet {
+
+
 
 
 
@@ -39,133 +65,370 @@ protected void doPost(
 
 
 
-request.setCharacterEncoding("UTF-8");
+
+
+    /*
+     =====================================
+     Encoding UTF-8
+     =====================================
+     */
+
+
+    request.setCharacterEncoding("UTF-8");
 
 
 
-String username =
-        request.getParameter("username");
 
 
 
-String password =
-        request.getParameter("password");
+    /*
+     =====================================
+     استقبال بيانات الدخول
+     =====================================
+     */
+
+
+    String username =
+            request.getParameter("username");
+
+
+
+    String password =
+            request.getParameter("password");
 
 
 
 
-try {
 
 
 
-Connection con =
+
+
+    Connection con = null;
+
+    PreparedStatement ps = null;
+
+    ResultSet rs = null;
+
+
+
+
+
+    try {
+
+
+
+
+
+        /*
+         =====================================
+         الاتصال بقاعدة البيانات
+         =====================================
+         */
+
+
+        con =
         DBConnection.getConnection();
 
 
 
 
-String sql =
-"SELECT * FROM super_admins WHERE username=? AND password=?";
 
 
 
-PreparedStatement ps =
+
+        /*
+         =====================================
+         التحقق من بيانات Super Admin
+         =====================================
+         */
+
+
+        String sql =
+
+        "SELECT * FROM super_admins "
+        + "WHERE username=? "
+        + "AND password=?";
+
+
+
+
+
+
+
+        ps =
         con.prepareStatement(sql);
 
 
 
-ps.setString(1, username);
-
-ps.setString(2, password);
 
 
+        ps.setString(
+                1,
+                username
+        );
 
-ResultSet rs =
+
+
+        ps.setString(
+                2,
+                password
+        );
+
+
+
+
+
+
+
+
+        rs =
         ps.executeQuery();
 
 
 
 
-if(rs.next()){
-
-
-
-HttpSession session =
-        request.getSession();
-
-
-
-session.setAttribute(
-        "isSuperAdmin",
-        true
-);
-
-
-
-session.setAttribute(
-        "adminUsername",
-        username
-);
 
 
 
 
-response.sendRedirect(
-        request.getContextPath()
-        + "/admin/super_admin_dashboard.jsp"
-);
+
+        if(rs.next()){
+
+
+
+
+
+            /*
+             =====================================
+             إنشاء Session
+             =====================================
+             */
+
+
+            HttpSession session =
+                    request.getSession();
+
+
+
+
+
+
+
+
+            /*
+             =====================================
+             تسجيل حالة Super Admin
+             =====================================
+             */
+
+
+            session.setAttribute(
+                    "isSuperAdmin",
+                    true
+            );
+
+
+
+
+
+
+
+
+            /*
+             =====================================
+             حفظ اسم المستخدم
+             =====================================
+             */
+
+
+            session.setAttribute(
+                    "adminUsername",
+                    username
+            );
+
+
+
+
+
+
+
+
+
+            /*
+             =====================================
+             تثبيت اللغة المختارة
+             
+             اللغة يتم اختيارها فقط
+             قبل الدخول
+             =====================================
+             */
+
+
+            Object lang =
+                    session.getAttribute("lang");
+
+
+
+            if(lang == null){
+
+
+                session.setAttribute(
+                        "lang",
+                        "ar"
+                );
+
+
+            }
+
+
+
+
+
+
+
+
+
+            /*
+             =====================================
+             الدخول إلى لوحة التحكم
+             =====================================
+             */
+
+
+            response.sendRedirect(
+
+                request.getContextPath()
+                + "/admin/super_admin_dashboard.jsp"
+
+            );
+
+
+
+
+
+
+
+        }
+
+        else{
+
+
+
+
+
+            /*
+             =====================================
+             بيانات غير صحيحة
+             =====================================
+             */
+
+
+            response.sendRedirect(
+
+                request.getContextPath()
+                + "/admin/superlogin.jsp?error=invalid"
+
+            );
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+    }
+
+    catch(Exception e){
+
+
+
+
+
+        e.printStackTrace();
+
+
+
+
+
+
+        /*
+         =====================================
+         خطأ في قاعدة البيانات
+         =====================================
+         */
+
+
+        response.sendRedirect(
+
+            request.getContextPath()
+            + "/admin/superlogin.jsp?error=db_error"
+
+        );
+
+
+
+
+
+
+
+    }
+
+    finally{
+
+
+
+
+
+        /*
+         =====================================
+         إغلاق الموارد
+         =====================================
+         */
+
+
+        try{
+
+            if(rs != null)
+                rs.close();
+
+
+            if(ps != null)
+                ps.close();
+
+
+            if(con != null)
+                con.close();
+
+
+
+        }
+
+        catch(Exception e){
+
+            e.printStackTrace();
+
+        }
+
+
+
+
+
+    }
+
+
 
 
 
 }
 
-else{
 
-
-// كلمة المرور أو المستخدم خاطئ
-
-response.sendRedirect(
-        request.getContextPath()
-        + "/admin/superlogin.jsp?error=invalid"
-);
-
-
-
-}
-
-
-
-
-rs.close();
-
-ps.close();
-
-con.close();
-
-
-
-}
-
-catch(Exception e){
-
-
-
-e.printStackTrace();
-
-
-
-response.sendRedirect(
-        request.getContextPath()
-        + "/admin/superlogin.jsp?error=db_error"
-);
-
-
-
-}
-
-
-
-}
 
 
 }

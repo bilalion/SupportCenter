@@ -11,7 +11,7 @@ String lang =
 
 
 String direction =
-        lang.equals("fr")
+        lang.equals("fr") || lang.equals("en")
         ? "ltr"
         : "rtl";
 

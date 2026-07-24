@@ -1,15 +1,79 @@
 /*
-    CENTRIA
-    Super Admin Dashboard
-    Professional Responsive UI
+==========================================================
+File        : super_admin_dashboard.css
+Project     : CENTRIA
+Module      : Super Admin Dashboard
+Author      : Chentouf Bilal
+Description :
+Main layout for the Super Admin Dashboard.
+Contains global variables, body layout,
+sidebar, branding and navigation menu.
+Responsive & RTL/LTR Ready.
+==========================================================
 */
 
 
-/* ==========================
-   RESET
-   ========================== */
+/* ======================================================
+   CSS VARIABLES
+   ====================================================== */
 
-*{
+:root{
+
+    /* Primary Colors */
+    --primary:#2563eb;
+    --primary-dark:#1d4ed8;
+
+    /* Accent Colors */
+    --success:#16a34a;
+    --warning:#f97316;
+    --danger:#ef4444;
+    --purple:#9333ea;
+
+    /* Neutral Colors */
+    --white:#ffffff;
+    --background:#f1f5f9;
+    --surface:#ffffff;
+
+    --title:#0f172a;
+    --text:#475569;
+    --muted:#94a3b8;
+    --border:#e2e8f0;
+
+    /* Sidebar */
+    --sidebar-start:#1e293b;
+    --sidebar-end:#0f172a;
+
+    /* Radius */
+    --radius-sm:10px;
+    --radius:14px;
+    --radius-lg:18px;
+    --radius-xl:22px;
+
+    /* Shadows */
+    --shadow-sm:
+        0 4px 10px rgba(15,23,42,.05);
+
+    --shadow:
+        0 10px 24px rgba(15,23,42,.08);
+
+    --shadow-lg:
+        0 18px 40px rgba(15,23,42,.12);
+
+    /* Animation */
+
+    --transition:.30s ease;
+
+}
+
+
+
+/* ======================================================
+   GLOBAL RESET
+   ====================================================== */
+
+*,
+*::before,
+*::after{
 
     margin:0;
     padding:0;
@@ -19,35 +83,40 @@
 
 
 
-/* ==========================
-   BODY LAYOUT
-   ========================== */
+html{
 
-
-body{
-
-    font-family:'Segoe UI',
-    Tahoma,
-    Geneva,
-    Verdana,
-    sans-serif;
-
-    min-height:100vh;
-
-    background:#f1f5f9;
-
-    display:flex;
-
-    overflow-x:hidden;
+    scroll-behavior:smooth;
 
 }
 
 
 
-/* =================================================
-   SIDEBAR
-   ================================================= */
+body{
 
+    height:100vh;
+
+    display:flex;
+
+    overflow-x:hidden;
+
+    font-family:
+        "Segoe UI",
+        Tahoma,
+        Geneva,
+        Verdana,
+        sans-serif;
+
+    background:var(--background);
+
+    color:var(--text);
+
+}
+
+
+
+/* ======================================================
+   SIDEBAR
+   ====================================================== */
 
 .sidebar{
 
@@ -55,18 +124,7 @@ body{
 
     min-width:280px;
 
-    min-height:100vh;
-
-    background:
-    linear-gradient(
-        180deg,
-        #1e293b,
-        #0f172a
-    );
-
-    color:white;
-
-    padding:25px 20px;
+    height:100vh;
 
     display:flex;
 
@@ -74,16 +132,35 @@ body{
 
     flex-shrink:0;
 
+    padding:28px 20px;
+
+    color:var(--white);
+
+    background:
+
+        linear-gradient(
+            180deg,
+            var(--sidebar-start),
+            var(--sidebar-end)
+        );
+
+    box-shadow:
+
+        4px 0 20px rgba(15,23,42,.10);
+
+    transition:var(--transition);
+
+    overflow:hidden;
+
 }
 
 
 
 
 
-/* ==========================
-   BRAND
-   ========================== */
-
+/* ======================================================
+   BRAND SECTION
+   ====================================================== */
 
 .brand-section{
 
@@ -95,13 +172,19 @@ body{
 
 .logo{
 
-    width:80px;
+    width:82px;
 
-    height:80px;
+    height:82px;
 
     object-fit:contain;
 
-    margin-bottom:12px;
+    margin-bottom:14px;
+
+    filter:
+
+        drop-shadow(
+            0 6px 12px rgba(0,0,0,.25)
+        );
 
 }
 
@@ -109,9 +192,13 @@ body{
 
 .brand-name{
 
-    font-size:28px;
+    font-size:30px;
 
     font-weight:700;
+
+    color:var(--white);
+
+    letter-spacing:.5px;
 
 }
 
@@ -127,56 +214,61 @@ body{
 
     font-size:13px;
 
+    line-height:1.6;
+
 }
 
 
 
-
+/* ======================================================
+   DIVIDER
+   ====================================================== */
 
 .sidebar hr{
 
-    border:0;
+    border:none;
 
     height:1px;
 
-    background:
-    rgba(255,255,255,.15);
+    margin:24px 0;
 
-    margin:20px 0;
+    background:
+
+        rgba(255,255,255,.12);
 
 }
 
 
 
-
-
-/* ==========================
-   WELCOME
-   ========================== */
-
+/* ======================================================
+   WELCOME SECTION
+   ====================================================== */
 
 .welcome-text{
+
+    margin-bottom:22px;
 
     text-align:center;
 
     color:#e2e8f0;
 
-    margin-bottom:20px;
+    line-height:1.7;
 
 }
 
 
 
-
-
-/* ==========================
-   MENU
-   ========================== */
-
+/* ======================================================
+   NAVIGATION
+   ====================================================== */
 
 .menu-section{
 
     flex:1;
+
+    display:flex;
+
+    flex-direction:column;
 
 }
 
@@ -188,61 +280,121 @@ body{
 
     align-items:center;
 
-    gap:12px;
+    gap:14px;
 
-    padding:13px 15px;
+    padding:14px 16px;
 
     margin-bottom:10px;
 
-    border-radius:12px;
-
-    color:white;
+    border-radius:var(--radius);
 
     text-decoration:none;
 
-    background:
-    rgba(255,255,255,.05);
+    color:var(--white);
 
-    transition:.3s;
+    background:
+
+        rgba(255,255,255,.05);
+
+    transition:
+
+        background var(--transition),
+        transform var(--transition),
+        box-shadow var(--transition);
 
 }
 
 
+
+/* Hover */
 
 .menu-section a:hover{
 
-    background:#2563eb;
+    background:var(--primary);
 
-    transform:translateX(-5px);
+    transform:translateX(-4px);
+
+    box-shadow:
+
+        0 8px 18px rgba(37,99,235,.30);
 
 }
 
 
 
+/* Active Item */
+
+.menu-section a.active{
+
+    background:
+
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--primary-dark)
+        );
+
+    box-shadow:
+
+        0 10px 22px rgba(37,99,235,.35);
+
+}
 
 
-/* ==========================
-   LOGOUT
-   ========================== */
 
+/* Navigation Icons */
 
-.logout-btn{
+.menu-section a i{
 
-    display:block;
+    width:22px;
 
     text-align:center;
 
-    padding:13px;
+    font-size:18px;
 
-    border-radius:12px;
+}
 
-    background:#ef4444;
 
-    color:white;
+
+/* ======================================================
+   LOGOUT BUTTON
+   ====================================================== */
+
+.logout-btn{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:14px;
+
+    margin-top:10px;
+
+    border-radius:var(--radius);
 
     text-decoration:none;
 
-    font-weight:bold;
+    font-weight:700;
+
+    color:var(--white);
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #ef4444,
+            #dc2626
+        );
+
+    transition:
+
+        transform var(--transition),
+        box-shadow var(--transition),
+        opacity var(--transition);
 
 }
 
@@ -250,18 +402,17 @@ body{
 
 .logout-btn:hover{
 
-    background:#dc2626;
+    transform:translateY(-3px);
+
+    box-shadow:
+
+        0 10px 22px rgba(239,68,68,.35);
 
 }
 
-
-
-
-
-/* =================================================
+/* ======================================================
    MAIN CONTENT
-   ================================================= */
-
+   ====================================================== */
 
 .main-content{
 
@@ -271,24 +422,19 @@ body{
 
     padding:30px;
 
+    display:flex;
+
+    flex-direction:column;
+
 }
 
 
 
-
-
-/* =================================================
-   HEADER
-   ================================================= */
-
+/* ======================================================
+   PAGE HEADER
+   ====================================================== */
 
 .header{
-
-    background:white;
-
-    border-radius:18px;
-
-    padding:20px 25px;
 
     display:flex;
 
@@ -300,32 +446,55 @@ body{
 
     margin-bottom:30px;
 
-    box-shadow:
+    padding:22px 28px;
 
-    0 8px 20px rgba(0,0,0,.08);
+    border-radius:var(--radius-lg);
+
+    background:var(--surface);
+
+    box-shadow:var(--shadow);
 
 }
 
 
+
+.header-title{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:6px;
+
+}
 
 
 
 .header-title h2{
 
-    color:#1e293b;
+    color:var(--title);
 
     font-size:24px;
+
+    font-weight:700;
 
 }
 
 
 
+.header-title p{
+
+    color:var(--text);
+
+    font-size:14px;
+
+}
 
 
-/* ==========================
+
+/* ======================================================
    HEADER ACTIONS
-   ========================== */
-
+   ====================================================== */
 
 .header-actions{
 
@@ -343,59 +512,9 @@ body{
 
 
 
-/* ==========================
-   LANGUAGE BUTTONS
-   ========================== */
-
-
-.language-buttons{
-
-    display:flex;
-
-    gap:8px;
-
-    flex-wrap:wrap;
-
-}
-
-
-
-.language-buttons a{
-
-    padding:9px 15px;
-
-    border-radius:10px;
-
-    background:#2563eb;
-
-    color:white;
-
-    text-decoration:none;
-
-    font-weight:600;
-
-    font-size:14px;
-
-    white-space:nowrap;
-
-}
-
-
-
-.language-buttons a:hover{
-
-    background:#1d4ed8;
-
-}
-
-
-
-
-
-/* ==========================
-   USER
-   ========================== */
-
+/* ======================================================
+   USER INFO
+   ====================================================== */
 
 .header-user{
 
@@ -403,11 +522,17 @@ body{
 
     align-items:center;
 
-    gap:10px;
+    gap:12px;
 
-    color:#475569;
+    padding:8px 14px;
 
-    font-weight:bold;
+    border-radius:12px;
+
+    background:#f8fafc;
+
+    color:var(--text);
+
+    font-weight:600;
 
 }
 
@@ -415,22 +540,35 @@ body{
 
 .user-icon{
 
-    font-size:28px;
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:50%;
+
+    background:#eff6ff;
+
+    color:var(--primary);
+
+    font-size:20px;
 
 }
 
 
 
-
-
-/* =================================================
-   DASHBOARD HEADER
-   ================================================= */
-
+/* ======================================================
+   DASHBOARD TITLE
+   ====================================================== */
 
 .dashboard-header{
 
-    margin-bottom:30px;
+    margin-bottom:32px;
 
 }
 
@@ -438,11 +576,13 @@ body{
 
 .dashboard-header h1{
 
+    margin-bottom:10px;
+
+    color:var(--title);
+
     font-size:38px;
 
-    color:#0f172a;
-
-    margin-bottom:10px;
+    font-weight:700;
 
 }
 
@@ -452,16 +592,15 @@ body{
 
     color:#64748b;
 
+    line-height:1.7;
+
 }
 
 
 
-
-
-/* =================================================
+/* ======================================================
    STATISTICS GRID
-   ================================================= */
-
+   ====================================================== */
 
 .stats-container{
 
@@ -469,36 +608,35 @@ body{
 
     grid-template-columns:
 
-    repeat(auto-fit,minmax(230px,1fr));
+        repeat(auto-fit,minmax(240px,1fr));
 
-    gap:25px;
+    gap:24px;
 
-    margin-bottom:30px;
+    margin-bottom:32px;
 
 }
 
 
 
-
-
-/* =================================================
-   CARDS
-   ================================================= */
-
+/* ======================================================
+   COMMON CARD
+   ====================================================== */
 
 .card{
 
-    background:white;
+    background:var(--surface);
+
+    border-radius:var(--radius-lg);
 
     padding:25px;
 
-    border-radius:18px;
+    box-shadow:var(--shadow);
 
-    box-shadow:
+    transition:
 
-    0 8px 20px rgba(0,0,0,.08);
+        transform var(--transition),
 
-    transition:.3s;
+        box-shadow var(--transition);
 
 }
 
@@ -506,28 +644,25 @@ body{
 
 .card:hover{
 
-    transform:translateY(-5px);
+    transform:translateY(-6px);
+
+    box-shadow:var(--shadow-lg);
 
 }
-
-
 
 
 
 .card h3{
 
-    color:#475569;
+    color:var(--text);
 
 }
 
 
 
-
-
-/* =================================================
-   STATISTIC CARDS
-   ================================================= */
-
+/* ======================================================
+   DASHBOARD CARD
+   ====================================================== */
 
 .dashboard-card{
 
@@ -537,65 +672,85 @@ body{
 
     gap:20px;
 
-    min-height:140px;
+    min-height:145px;
 
 }
 
 
 
-
+/* ======================================================
+   CARD ICON
+   ====================================================== */
 
 .card-icon{
 
-    width:70px;
+    width:72px;
 
-    height:70px;
-
-    border-radius:50%;
+    height:72px;
 
     display:flex;
 
-    align-items:center;
-
     justify-content:center;
 
-    font-size:35px;
+    align-items:center;
 
-    background:#f1f5f9;
+    border-radius:50%;
+
+    font-size:34px;
+
+    background:#f8fafc;
+
+    flex-shrink:0;
 
 }
 
 
+
+/* ======================================================
+   CARD CONTENT
+   ====================================================== */
+
+.card-info{
+
+    flex:1;
+
+}
 
 
 
 .card-info h3{
 
-    font-size:16px;
-
     margin-bottom:10px;
 
+    font-size:16px;
+
+    font-weight:600;
+
 }
-
-
 
 
 
 .card-info strong{
 
-    font-size:35px;
+    display:block;
 
-    color:#1e293b;
+    font-size:36px;
+
+    font-weight:700;
+
+    color:var(--title);
 
 }
 
 
 
-
+/* ======================================================
+   CARD COLORS
+   ====================================================== */
 
 .blue-card{
 
-    border-right:6px solid #2563eb;
+    border-right:6px solid var(--primary);
 
 }
 
@@ -603,7 +758,7 @@ body{
 
 .green-card{
 
-    border-right:6px solid #16a34a;
+    border-right:6px solid var(--success);
 
 }
 
@@ -611,7 +766,7 @@ body{
 
 .orange-card{
 
-    border-right:6px solid #f97316;
+    border-right:6px solid var(--warning);
 
 }
 
@@ -619,18 +774,15 @@ body{
 
 .purple-card{
 
-    border-right:6px solid #9333ea;
+    border-right:6px solid var(--purple);
 
 }
 
 
 
-
-
-/* ==========================
+/* ======================================================
    WELCOME CARD
-   ========================== */
-
+   ====================================================== */
 
 .welcome-card{
 
@@ -638,7 +790,7 @@ body{
 
     align-items:center;
 
-    gap:25px;
+    gap:24px;
 
     margin-top:30px;
 
@@ -648,21 +800,58 @@ body{
 
 .welcome-icon{
 
-    font-size:60px;
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    width:90px;
+
+    height:90px;
+
+    border-radius:50%;
+
+    background:#eff6ff;
+
+    color:var(--primary);
+
+    font-size:44px;
+
+    flex-shrink:0;
 
 }
 
 
 
+.welcome-content{
+
+    flex:1;
+
+}
 
 
 
+.welcome-content h2{
 
-/* =================================================
-   RTL ARABIC
-   Sidebar Right
-   ================================================= */
+    margin-bottom:10px;
 
+    color:var(--title);
+
+}
+
+
+
+.welcome-content p{
+
+    color:var(--text);
+
+    line-height:1.8;
+
+}
+/* ======================================================
+   RTL SUPPORT
+   ====================================================== */
 
 html[dir="rtl"] body{
 
@@ -672,69 +861,6 @@ html[dir="rtl"] body{
 
 }
 
-
-
-/*
-   Sidebar يتحرك يميناً
-*/
-
-html[dir="rtl"] .sidebar{
-
-    order:0;
-
-}
-
-
-
-/*
-   المحتوى يبقى يسار sidebar
-*/
-
-html[dir="rtl"] .main-content{
-
-    order:1;
-
-    text-align:right;
-
-}
-
-
-
-/*
-   عناصر القائمة العربية
-*/
-
-html[dir="rtl"] .menu-section a{
-
-    flex-direction:row-reverse;
-
-    text-align:right;
-
-}
-
-
-
-/*
-   الهيدر العربي
-*/
-
-html[dir="rtl"] .header{
-
-    flex-direction:row-reverse;
-
-}
-
-
-
-/*
-   الأزرار والمستخدم
-*/
-
-html[dir="rtl"] .header-actions{
-
-    flex-direction:row-reverse;
-
-}
 
 
 html[dir="rtl"] .sidebar{
@@ -759,6 +885,8 @@ html[dir="rtl"] .menu-section a{
 
     flex-direction:row-reverse;
 
+    text-align:right;
+
 }
 
 
@@ -771,15 +899,57 @@ html[dir="rtl"] .header{
 
 
 
+html[dir="rtl"] .header-actions{
+
+    flex-direction:row-reverse;
+
+}
 
 
 
+html[dir="rtl"] .header-user{
 
-/* =================================================
-   LTR FRENCH
-   Sidebar Left
-   ================================================= */
+    flex-direction:row-reverse;
 
+}
+
+
+
+html[dir="rtl"] .dashboard-card{
+
+    flex-direction:row-reverse;
+
+}
+
+
+
+html[dir="rtl"] .welcome-card{
+
+    flex-direction:row-reverse;
+
+}
+
+
+
+html[dir="rtl"] .card-info{
+
+    text-align:right;
+
+}
+
+
+
+html[dir="rtl"] .dashboard-header{
+
+    text-align:right;
+
+}
+
+
+
+/* ======================================================
+   LTR SUPPORT
+   ====================================================== */
 
 html[dir="ltr"] body{
 
@@ -809,6 +979,14 @@ html[dir="ltr"] .main-content{
 
 
 
+html[dir="ltr"] .menu-section a{
+
+    flex-direction:row;
+
+}
+
+
+
 html[dir="ltr"] .header{
 
     flex-direction:row;
@@ -817,17 +995,178 @@ html[dir="ltr"] .header{
 
 
 
-/* =================================================
+html[dir="ltr"] .header-actions{
+
+    flex-direction:row;
+
+}
+
+
+
+html[dir="ltr"] .header-user{
+
+    flex-direction:row;
+
+}
+
+
+
+html[dir="ltr"] .dashboard-card{
+
+    flex-direction:row;
+
+}
+
+
+
+html[dir="ltr"] .welcome-card{
+
+    flex-direction:row;
+
+}
+
+
+
+html[dir="ltr"] .card-info{
+
+    text-align:left;
+
+}
+
+
+
+html[dir="ltr"] .dashboard-header{
+
+    text-align:left;
+
+}
+
+
+
+/* ======================================================
+   GLOBAL ANIMATIONS
+   ====================================================== */
+
+@keyframes fadeInUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(18px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+
+.card{
+
+    animation:fadeInUp .45s ease both;
+
+}
+
+
+
+/* ======================================================
+   SCROLLBAR
+   ====================================================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+    height:10px;
+
+}
+
+
+
+::-webkit-scrollbar-track{
+
+    background:#e2e8f0;
+
+}
+
+
+
+::-webkit-scrollbar-thumb{
+
+    background:#94a3b8;
+
+    border-radius:20px;
+
+}
+
+
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#64748b;
+
+}
+
+
+
+/* Firefox */
+
+*{
+
+    scrollbar-width:thin;
+
+    scrollbar-color:#94a3b8 #e2e8f0;
+
+}
+
+
+
+/* ======================================================
+   ACCESSIBILITY
+   ====================================================== */
+
+a:focus-visible,
+button:focus-visible{
+
+    outline:3px solid rgba(37,99,235,.30);
+
+    outline-offset:3px;
+
+}
+
+
+
+/* ======================================================
    RESPONSIVE
-   ================================================= */
+   ====================================================== */
+
+@media (max-width:1200px){
+
+    .stats-container{
+
+        grid-template-columns:
+
+            repeat(2,minmax(240px,1fr));
+
+    }
+
+}
 
 
-@media(max-width:900px){
 
+@media (max-width:900px){
 
     body{
 
-        flex-direction:column!important;
+        flex-direction:column !important;
 
     }
 
@@ -841,13 +1180,15 @@ html[dir="ltr"] .header{
 
         min-height:auto;
 
+        padding:20px;
+
     }
 
 
 
     .main-content{
 
-        padding:15px;
+        padding:20px;
 
     }
 
@@ -855,9 +1196,11 @@ html[dir="ltr"] .header{
 
     .header{
 
-        flex-direction:column!important;
+        flex-direction:column !important;
 
         align-items:stretch;
+
+        text-align:center;
 
     }
 
@@ -871,4 +1214,103 @@ html[dir="ltr"] .header{
 
 
 
+    .dashboard-card{
+
+        flex-direction:column;
+
+        text-align:center;
+
+    }
+
+
+
+    .welcome-card{
+
+        flex-direction:column;
+
+        text-align:center;
+
+    }
+
 }
+
+
+
+@media (max-width:600px){
+
+    .dashboard-header h1{
+
+        font-size:30px;
+
+    }
+
+
+
+    .header{
+
+        padding:18px;
+
+    }
+
+
+
+    .card{
+
+        padding:20px;
+
+    }
+
+
+
+    .card-icon{
+
+        width:60px;
+
+        height:60px;
+
+        font-size:28px;
+
+    }
+
+
+
+    .card-info strong{
+
+        font-size:30px;
+
+    }
+
+
+
+    .language-buttons{
+
+        justify-content:center;
+
+        width:100%;
+
+    }
+
+
+
+    .language-buttons a{
+
+        flex:1;
+
+    }
+
+
+
+    .header-user{
+
+        justify-content:center;
+
+    }
+
+}
+
+
+
+/* ======================================================
+   END OF FILE
+   super_admin_dashboard.css
+   ====================================================== */

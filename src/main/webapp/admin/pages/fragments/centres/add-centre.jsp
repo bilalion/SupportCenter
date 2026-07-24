@@ -2,11 +2,29 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 
+<%
+
+String lang =
+        session.getAttribute("lang") != null
+        ? session.getAttribute("lang").toString()
+        : "ar";
+
+
+String direction =
+        lang.equals("ar")
+        ? "rtl"
+        : "ltr";
+
+
+%>
+
 
 
 <!DOCTYPE html>
 
-<html lang="ar" dir="rtl">
+<html lang="<%=lang%>" dir="<%=direction%>">
+
+
 
 
 <head>

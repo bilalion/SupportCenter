@@ -16,25 +16,42 @@ import javax.servlet.http.HttpSession;
 
 
 
+/*
+ * Centria
+ *
+ * Language Manager
+ *
+ * Responsible for loading i18n files
+ *
+ * Supported languages:
+ * ar
+ * fr
+ * en
+ */
+
+
+
 public class LanguageManager {
 
 
 
-    private static Locale locale =
-            new Locale("ar");
 
+    /*
+     =====================================
+     Load language file
+     =====================================
+     */
 
-
-
-
-    private static ResourceBundle loadBundle(Locale locale){
+    private static ResourceBundle loadBundle(
+            Locale locale){
 
 
         ResourceBundle bundle = null;
 
 
+
         String path =
-                "i18n/strings_" 
+                "i18n/strings_"
                 + locale.getLanguage()
                 + ".properties";
 
@@ -46,6 +63,7 @@ public class LanguageManager {
             .getClassLoader()
             .getResourceAsStream(path)
         ){
+
 
 
             if(input == null){
@@ -82,6 +100,7 @@ public class LanguageManager {
 
         return bundle;
 
+
     }
 
 
@@ -90,13 +109,22 @@ public class LanguageManager {
 
 
 
+    /*
+     =====================================
+     Default language
+     Arabic
+     =====================================
+     */
 
+    public static String get(
+            String key){
 
-    public static String get(String key){
 
 
         ResourceBundle bundle =
-                loadBundle(locale);
+                loadBundle(
+                    new Locale("ar")
+                );
 
 
 
@@ -109,8 +137,10 @@ public class LanguageManager {
 
 
         return bundle.containsKey(key)
-                ? bundle.getString(key)
-                : key;
+                ?
+                bundle.getString(key)
+                :
+                key;
 
 
     }
@@ -123,14 +153,19 @@ public class LanguageManager {
 
 
 
+    /*
+     =====================================
+     Language by User Session
+     =====================================
+     */
+
     public static String get(
             String key,
-            HttpSession session
-    ){
+            HttpSession session){
 
 
 
-        String lang="ar";
+        String lang = "ar";
 
 
 
@@ -139,6 +174,7 @@ public class LanguageManager {
 
             Object current =
                     session.getAttribute("lang");
+
 
 
             if(current != null){
@@ -154,14 +190,40 @@ public class LanguageManager {
 
 
 
+
+        /*
+         Supported languages
+        */
+
+
+        if(!lang.equals("ar")
+                &&
+           !lang.equals("fr")
+                &&
+           !lang.equals("en")){
+
+
+            lang="ar";
+
+
+        }
+
+
+
+
+
+
         Locale currentLocale =
                 new Locale(lang);
 
 
 
 
+
         ResourceBundle bundle =
                 loadBundle(currentLocale);
+
+
 
 
 
@@ -174,46 +236,18 @@ public class LanguageManager {
 
 
 
+
+
         return bundle.containsKey(key)
-                ? bundle.getString(key)
-                : key;
+                ?
+                bundle.getString(key)
+                :
+                key;
 
 
 
     }
 
-
-
-
-
-
-
-
-
-    public static void setLanguage(String lang){
-
-
-        locale =
-                new Locale(lang);
-
-
-    }
-
-
-
-
-
-
-
-
-
-    public static Locale getLocale(){
-
-
-        return locale;
-
-
-    }
 
 
 

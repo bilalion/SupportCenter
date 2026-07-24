@@ -10,13 +10,25 @@ String lang =
         : "ar";
 
 
-String direction =
-        lang.equals("fr")
-        ? "ltr"
-        : "rtl";
 
+if(!lang.equals("ar")
+        && !lang.equals("fr")
+        && !lang.equals("en")){
+
+    lang="ar";
+
+}
+
+
+
+String direction =
+        lang.equals("ar")
+        ? "rtl"
+        : "ltr";
 
 %>
+
+
 
 
 
@@ -25,32 +37,47 @@ String direction =
 <html lang="<%=lang%>" dir="<%=direction%>">
 
 
+
 <head>
 
 
 <meta charset="UTF-8">
 
 
+
 <meta http-equiv="Cache-Control"
       content="no-cache, no-store, must-revalidate">
+
+
+<meta http-equiv="Pragma"
+      content="no-cache">
+
+
+<meta http-equiv="Expires"
+      content="0">
 
 
 
 <title>
 
-<%= LanguageManager.get("login.title", session) %>
+<%= LanguageManager.get(
+        "login.title",
+        session
+) %>
 
 </title>
 
 
 
 
-<link rel="stylesheet"
-href="<%=request.getContextPath()%>/assets/css/superlogin.css?v=2">
 
+<link rel="stylesheet"
+
+href="<%=request.getContextPath()%>/assets/css/superlogin.css?v=5">
 
 
 </head>
+
 
 
 
@@ -61,29 +88,61 @@ href="<%=request.getContextPath()%>/assets/css/superlogin.css?v=2">
 
 
 
-
 <!-- ==========================
-     LANGUAGE SWITCHER
-     خارج صندوق الدخول
+     LANGUAGE SELECTOR
      ========================== -->
 
 
-<div class="language-switcher">
+<div class="language-selector">
 
 
-<a href="<%=request.getContextPath()%>/LanguageServlet?lang=ar">
+
+<form action="<%=request.getContextPath()%>/LanguageServlet"
+      method="get">
+
+
+
+<select name="lang"
+        onchange="this.form.submit()">
+
+
+
+<option value="ar"
+<%= lang.equals("ar") ? "selected" : "" %>>
 
 🇲🇦 العربية
 
-</a>
+</option>
 
 
 
-<a href="<%=request.getContextPath()%>/LanguageServlet?lang=fr">
+
+
+<option value="fr"
+<%= lang.equals("fr") ? "selected" : "" %>>
 
 🇫🇷 Français
 
-</a>
+</option>
+
+
+
+
+
+<option value="en"
+<%= lang.equals("en") ? "selected" : "" %>>
+
+🇬🇧 English
+
+</option>
+
+
+
+</select>
+
+
+
+</form>
 
 
 
@@ -109,12 +168,6 @@ href="<%=request.getContextPath()%>/assets/css/superlogin.css?v=2">
 
 
 
-
-<!-- ==========================
-     BRAND
-     ========================== -->
-
-
 <div class="login-brand">
 
 
@@ -133,12 +186,12 @@ class="login-logo"
 
 
 
-
 <h1>
 
 Centria
 
 </h1>
+
 
 
 
@@ -159,9 +212,13 @@ Super Admin
 
 
 
+
 <h2>
 
-<%= LanguageManager.get("login.title", session) %>
+<%= LanguageManager.get(
+        "login.title",
+        session
+) %>
 
 </h2>
 
@@ -172,16 +229,23 @@ Super Admin
 
 
 
+
 <%
 
-String error = request.getParameter("error");
+String error =
+        request.getParameter("error");
 
 
 boolean loginError =
-        "invalid".equals(error);
+        "invalid".equals(error)
+        ||
+        "db_error".equals(error);
+
 
 
 %>
+
+
 
 
 
@@ -199,10 +263,46 @@ if(loginError){
 <div class="error-message">
 
 
-<%= LanguageManager.get("error.login.invalid", session) %>
+<%
+
+if("invalid".equals(error)){
+
+
+%>
+
+
+<%= LanguageManager.get(
+        "error.login.invalid",
+        session
+) %>
+
+
+<%
+
+
+}else{
+
+
+%>
+
+
+<%= LanguageManager.get(
+        "error.database",
+        session
+) %>
+
+
+<%
+
+}
+
+
+%>
+
 
 
 </div>
+
 
 
 <%
@@ -219,14 +319,18 @@ if(loginError){
 
 
 
-<!-- Database Status -->
+<!-- DATABASE STATUS -->
 
 
 <div id="dbStatus"
+
      class="db-status checking">
 
 
-<%= LanguageManager.get("database.checking", session) %>
+<%= LanguageManager.get(
+        "database.checking",
+        session
+) %>
 
 
 </div>
@@ -240,6 +344,7 @@ if(loginError){
 
 
 <form action="<%=request.getContextPath()%>/SuperLoginServlet"
+
       method="POST">
 
 
@@ -248,11 +353,8 @@ if(loginError){
 
 
 
-
-<!-- Username -->
-
-
 <div class="input-group">
+
 
 
 <span class="input-icon">
@@ -263,11 +365,16 @@ if(loginError){
 
 
 
+
+
 <input type="text"
 
        name="username"
 
-       placeholder="<%= LanguageManager.get("login.username", session) %>"
+       placeholder="<%= LanguageManager.get(
+            "login.username",
+            session
+       ) %>"
 
        required>
 
@@ -281,9 +388,6 @@ if(loginError){
 
 
 
-
-
-<!-- Password -->
 
 
 <div class="password-wrapper">
@@ -298,13 +402,18 @@ if(loginError){
 
 
 
+
+
 <input type="password"
 
        id="password"
 
        name="password"
 
-       placeholder="<%= LanguageManager.get("login.password", session) %>"
+       placeholder="<%= LanguageManager.get(
+            "login.password",
+            session
+       ) %>"
 
        required>
 
@@ -316,12 +425,8 @@ if(loginError){
 
      onclick="togglePassword()">
 
-
-
 👁
 
-
-
 </div>
 
 
@@ -334,9 +439,6 @@ if(loginError){
 
 
 
-
-
-<!-- Remember -->
 
 
 <div class="remember-me">
@@ -349,10 +451,15 @@ if(loginError){
 
 
 
+
+
 <label>
 
 
-<%= LanguageManager.get("login.remember", session) %>
+<%= LanguageManager.get(
+        "login.remember",
+        session
+) %>
 
 
 </label>
@@ -373,18 +480,19 @@ if(loginError){
 
         type="submit"
 
-        class="<%= loginError ? "login-error" : "" %>"
-
         disabled>
 
 
 🚀
 
-<%= LanguageManager.get("login.button", session) %>
+
+<%= LanguageManager.get(
+        "login.button",
+        session
+) %>
 
 
 </button>
-
 
 
 
@@ -412,6 +520,7 @@ if(loginError){
 
 
 const contextPath =
+
 "<%=request.getContextPath()%>";
 
 
@@ -423,10 +532,11 @@ const contextPath =
 
 
 
-<script src="<%=request.getContextPath()%>/assets/js/superlogin.js?v=2">
+
+
+<script src="<%=request.getContextPath()%>/assets/js/superlogin.js?v=5">
 
 </script>
-
 
 
 

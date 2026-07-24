@@ -310,9 +310,24 @@ List<Centre> centres =
 (List<Centre>)request.getAttribute("centres");
 
 
-
 SimpleDateFormat sdf =
 new SimpleDateFormat("dd/MM/yyyy");
+
+
+// ==========================
+// PAGINATION DATA
+// ==========================
+
+int currentPage =
+request.getAttribute("currentPage") != null
+? (Integer)request.getAttribute("currentPage")
+: 1;
+
+
+int pageSize =
+request.getAttribute("pageSize") != null
+? (Integer)request.getAttribute("pageSize")
+: 10;
 
 
 

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.centria.controllers.auth;
 
 
@@ -23,8 +19,8 @@ import javax.servlet.http.HttpSession;
 public class LanguageServlet extends HttpServlet {
 
 
-@Override
 
+@Override
 protected void doGet(
         HttpServletRequest request,
         HttpServletResponse response)
@@ -33,61 +29,108 @@ protected void doGet(
 
 
 
-String lang =
-        request.getParameter("lang");
-
-
-
-if(lang == null || lang.isEmpty()){
-
-    lang = "ar";
-
-}
+    HttpSession session =
+            request.getSession();
 
 
 
 
-HttpSession session =
-        request.getSession();
+    /*
+     ======================================
+     الحصول على اللغة المختارة
+     ======================================
+     */
+
+
+    String lang =
+            request.getParameter("lang");
 
 
 
-// حفظ اللغة في Session
+    if(lang == null || lang.isEmpty()){
 
-session.setAttribute(
-        "lang",
-        lang
-);
+        lang="ar";
 
-
-
-// العودة إلى الصفحة السابقة
-
-String referer =
-        request.getHeader("Referer");
+    }
 
 
 
-if(referer != null){
-
-    response.sendRedirect(referer);
-
-}
-
-else{
 
 
-    response.sendRedirect(
-        request.getContextPath()
-        + "/admin/superlogin.jsp"
+    /*
+     ======================================
+     اللغات المدعومة
+     ======================================
+     */
+
+
+    if(!lang.equals("ar")
+            &&
+       !lang.equals("fr")
+            &&
+       !lang.equals("en")){
+
+
+        lang="ar";
+
+
+    }
+
+
+
+
+
+    /*
+     ======================================
+     حفظ اللغة للمستخدم الحالي
+     ======================================
+     */
+
+
+    session.setAttribute(
+            "lang",
+            lang
     );
 
 
-}
+
+
+
+
+    /*
+     ======================================
+     العودة للصفحة الحالية
+     ======================================
+     */
+
+
+    String referer =
+            request.getHeader("Referer");
+
+
+
+    if(referer != null){
+
+
+        response.sendRedirect(referer);
+
+
+    }
+    else{
+
+
+        response.sendRedirect(
+            request.getContextPath()
+            + "/admin/super_admin_dashboard.jsp"
+        );
+
+
+    }
 
 
 
 }
+
 
 
 }
