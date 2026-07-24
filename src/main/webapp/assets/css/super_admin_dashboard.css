@@ -126,6 +126,10 @@ body{
 
     height:100vh;
 
+    max-height:100vh;
+
+    overflow-y:auto;
+
     display:flex;
 
     flex-direction:column;
@@ -150,7 +154,7 @@ body{
 
     transition:var(--transition);
 
-    overflow:hidden;
+
 
 }
 
@@ -269,6 +273,7 @@ body{
     display:flex;
 
     flex-direction:column;
+      overflow-y:auto;
 
 }
 
@@ -1309,7 +1314,55 @@ button:focus-visible{
 }
 
 
+/* FIX SIDEBAR VISIBILITY */
 
+body{
+    overflow:hidden;
+}
+
+
+.sidebar{
+
+    height:100vh;
+
+    overflow-y:auto !important;
+
+    overflow-x:hidden;
+
+    flex-shrink:0;
+
+}
+
+
+.main-content{
+
+    flex:1;
+
+    min-width:0;
+
+    overflow-y:auto;
+
+    overflow-x:auto;
+
+}
+
+
+/* Prevent large tables from pushing layout */
+
+table{
+
+    max-width:100%;
+
+}
+
+
+.content-area{
+
+    width:100%;
+
+    overflow-x:auto;
+
+}
 /* ======================================================
    END OF FILE
    super_admin_dashboard.css
