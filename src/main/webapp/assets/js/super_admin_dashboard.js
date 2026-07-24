@@ -39,25 +39,22 @@ function loadContent(page) {
      * Normal JSP pages
      */
 
-    else {
+ else {
 
 
-
-        url =
-        window.contextPath +
-        "/admin/pages/" +
-        page;
-
+    url =
+    window.contextPath +
+    "/admin/pages/" +
+    page;
 
 
-    }
-
-
+}
 
 
 
 
 
+console.log("Loading:", url);
     fetch(url)
 
 
@@ -100,11 +97,15 @@ function loadContent(page) {
 
 
     // تشغيل تهيئة صفحة المراكز بعد تحميلها
-    if(typeof initCentresPage === "function"){
+  if(
+    page.includes("CentreServlet")
+    &&
+    typeof initCentresPage === "function"
+){
 
-        initCentresPage();
+    initCentresPage();
 
-    }
+}
 
 
 

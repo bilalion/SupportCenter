@@ -69,9 +69,8 @@
              ========================== -->
 
 
-        <a href="javascript:void(0)"
-           onclick="loadContent('accueil.jsp')">
-
+       <a href="javascript:void(0)"
+  onclick="loadContent('accueil.jsp')">
 
             🏠
 
@@ -116,7 +115,7 @@
 
 
         <a href="javascript:void(0)"
-           onclick="loadContent('payments.jsp')">
+        onclick="loadContent('payments.jsp')">
 
 
             💰
@@ -162,7 +161,7 @@
 
 
         <a href="javascript:void(0)"
-           onclick="loadContent('settings.jsp')">
+     onclick="loadContent('settings.jsp')">
 
 
             ⚙️

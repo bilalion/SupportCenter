@@ -131,7 +131,9 @@ String section =
         request.getParameter("section");
 
 
-if(section == null || section.isEmpty()){
+if(section == null 
+   || section.isEmpty()
+  || "home".equals(section)){
 
 
 %>
