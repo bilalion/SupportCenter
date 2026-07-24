@@ -4,7 +4,36 @@
  */
 
 
-function loadContent(page) {
+/*
+ * Load Dashboard Content
+ */
+
+function loadContent(page, element) {
+
+
+    /*
+     * Active Menu Handling
+     */
+
+    if(element){
+
+
+        document
+        .querySelectorAll(".menu-link")
+        .forEach(function(link){
+
+            link.classList.remove("active");
+
+        });
+
+
+
+        element.classList.add("active");
+
+
+    }
+
+
 
 
 
@@ -22,15 +51,14 @@ function loadContent(page) {
     if(page.startsWith("CentreServlet")) {
 
 
-
         url =
         window.contextPath +
         "/" +
         page;
 
 
-
     }
+
 
 
 
@@ -39,22 +67,26 @@ function loadContent(page) {
      * Normal JSP pages
      */
 
- else {
+    else {
 
 
-    url =
-    window.contextPath +
-    "/admin/pages/" +
-    page;
+        url =
+        window.contextPath +
+        "/admin/pages/" +
+        page;
 
 
-}
+    }
 
 
 
 
 
-console.log("Loading:", url);
+
+    console.log("Loading:", url);
+
+
+
     fetch(url)
 
 
@@ -66,11 +98,9 @@ console.log("Loading:", url);
         if(!response.ok) {
 
 
-
             throw new Error(
                 "HTTP ERROR : " + response.status
             );
-
 
 
         }
@@ -87,29 +117,40 @@ console.log("Loading:", url);
 
 
 
- .then(data => {
 
-
-    document.getElementById(
-        "content-area"
-    ).innerHTML = data;
+    .then(data => {
 
 
 
-    // تشغيل تهيئة صفحة المراكز بعد تحميلها
-  if(
-    page.includes("CentreServlet")
-    &&
-    typeof initCentresPage === "function"
-){
-
-    initCentresPage();
-
-}
+        document.getElementById(
+            "content-area"
+        ).innerHTML = data;
 
 
 
-})
+
+
+        /*
+         * Initialize Centres Page
+         */
+
+        if(
+            page.includes("CentreServlet")
+            &&
+            typeof initCentresPage === "function"
+        ){
+
+
+            initCentresPage();
+
+
+        }
+
+
+
+    })
+
+
 
 
 
@@ -129,6 +170,7 @@ console.log("Loading:", url);
         document.getElementById(
             "content-area"
         ).innerHTML =
+
         `
         <div class="card">
             Error loading content
@@ -142,4 +184,3 @@ console.log("Loading:", url);
 
 
 }
-

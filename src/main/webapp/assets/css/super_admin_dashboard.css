@@ -19,15 +19,21 @@ Responsive & RTL/LTR Ready.
 
 :root{
 
-    /* Primary Colors */
-    --primary:#2563eb;
-    --primary-dark:#1d4ed8;
+  /* Primary Colors */
+--primary:#2563eb;
+--primary-dark:#1e40af;
 
-    /* Accent Colors */
-    --success:#16a34a;
-    --warning:#f97316;
-    --danger:#ef4444;
-    --purple:#9333ea;
+
+/* Accent Colors */
+--success:#059669;
+--warning:#f59e0b;
+--danger:#dc2626;
+--purple:#7c3aed;
+
+
+/* Active Brand */
+--active-start:#2563eb;
+--active-end:#059669;
 
     /* Neutral Colors */
     --white:#ffffff;
@@ -323,25 +329,16 @@ body{
 
 }
 
-
-/* Active Item */
-
 .menu-section a.active{
 
-    background:
+    background:#1e40af;
 
-        linear-gradient(
-            135deg,
-            var(--primary),
-            var(--primary-dark)
-        );
+    color:white;
 
     box-shadow:
-
-        0 10px 22px rgba(37,99,235,.35);
+    0 10px 22px rgba(30,64,175,.45);
 
 }
-
 
 
 /* Navigation Icons */
@@ -888,10 +885,35 @@ html[dir="rtl"] .main-content{
 }
 
 
+/* ======================================================
+   RTL SIDEBAR MENU FIX
+   ====================================================== */
 
-html[dir="rtl"] .menu-section a{
+html[dir="rtl"] .sidebar {
 
-    flex-direction:row-reverse;
+    direction:rtl;
+
+}
+
+
+
+html[dir="rtl"] .menu-section {
+
+    direction:rtl;
+
+}
+
+
+
+html[dir="rtl"] .menu-section a {
+
+    display:flex;
+
+    flex-direction:row;
+
+    align-items:center;
+
+    direction:rtl;
 
     text-align:right;
 
@@ -899,11 +921,7 @@ html[dir="rtl"] .menu-section a{
 
 
 
-html[dir="rtl"] .header{
 
-    flex-direction:row-reverse;
-
-}
 
 
 
@@ -1366,8 +1384,111 @@ table{
     overflow-x:auto;
 
 }
+
+/* FINAL SIDEBAR RTL */
+
+html[dir="rtl"] .sidebar,
+html[dir="rtl"] .menu-section {
+    direction: rtl;
+}
+
+
+html[dir="rtl"] .menu-section a,
+html[dir="rtl"] .logout-btn {
+
+    direction: rtl;
+    display: flex;
+    align-items: center;
+
+}
+
+
+html[dir="rtl"] .menu-icon {
+
+    order: 2;
+    width: 24px;
+    min-width: 24px;
+    text-align: center;
+
+}
+
+
+html[dir="rtl"] .menu-text {
+
+    order: 1;
+    flex: 1;
+
+    direction: rtl;
+    text-align: right !important;
+
+    display: block;
+}
+
+
+/* ======================================================
+   LOGOUT CENTER FIX
+   ====================================================== */
+
+.logout-btn{
+
+    justify-content:center;
+
+    text-align:center;
+
+}
+
+
+.logout-btn .menu-icon{
+
+    width:auto;
+
+    min-width:auto;
+
+}
+
+
+.logout-btn .menu-text{
+
+    flex:none;
+
+    text-align:center;
+
+}
+
+/* ======================================================
+   FINAL LOGOUT ALIGNMENT FIX
+   ====================================================== */
+
+html[dir="rtl"] .logout-btn{
+
+    justify-content:center !important;
+
+}
+
+
+html[dir="rtl"] .logout-btn .menu-text{
+
+    order:1;
+
+    flex:none;
+
+    text-align:center !important;
+
+}
+
+
+html[dir="rtl"] .logout-btn .menu-icon{
+
+    order:2;
+
+    width:auto;
+
+    min-width:auto;
+
+}
+
 /* ======================================================
    END OF FILE
-   super_admin_dashboard.css
+   super_dmin_dashboard.css
    ====================================================== */
 
