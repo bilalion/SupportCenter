@@ -11,8 +11,6 @@ import com.centria.utils.PasswordUtil;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
-
-
 import java.util.List;
 
 
@@ -73,11 +71,13 @@ public class CentreServlet extends HttpServlet {
 
 
 
-        if(action == null){
+        if(action == null || action.isEmpty()){
 
-            action="list";
+            action = "list";
 
         }
+
+
 
 
 
@@ -90,37 +90,42 @@ public class CentreServlet extends HttpServlet {
 
 
                 listCentres(
-                    request,
-                    response
+                        request,
+                        response
                 );
-
 
                 break;
 
 
-case "status":
 
-    updateStatus(
-        request,
-        response
-    );
 
-    break;
+
+            case "status":
+
+
+                updateStatus(
+                        request,
+                        response
+                );
+
+                break;
+
+
+
+
 
             default:
 
 
                 listCentres(
-                    request,
-                    response
+                        request,
+                        response
                 );
-
 
                 break;
 
 
         }
-
 
 
     }
@@ -156,10 +161,9 @@ case "status":
         if("add".equals(action)){
 
 
-
             addCentre(
-                request,
-                response
+                    request,
+                    response
             );
 
 
@@ -174,10 +178,9 @@ case "status":
 
 
         doGet(
-            request,
-            response
+                request,
+                response
         );
-
 
 
     }
@@ -188,6 +191,13 @@ case "status":
 
 
 
+
+
+    /*
+    ======================================================
+    LIST CENTRES WITH PAGINATION
+    ======================================================
+    */
 
 
     private void listCentres(
@@ -215,31 +225,90 @@ case "status":
 
 
 
-        if(search==null){
+        if(search == null){
 
-            search="";
-
-        }
-
-
-
-        if(status==null || status.isEmpty()){
-
-            status="ALL";
-
-        }
-
-
-
-        if(order==null || order.isEmpty()){
-
-            order="NEW";
+            search = "";
 
         }
 
 
 
 
+        if(status == null || status.isEmpty()){
+
+            status = "ALL";
+
+        }
+
+
+
+
+        if(order == null || order.isEmpty()){
+
+            order = "NEW";
+
+        }
+
+
+
+
+
+
+
+        /*
+        ================================
+        PAGINATION PARAMETERS
+        ================================
+        */
+
+
+        int page = 1;
+
+
+        int pageSize = 10;
+
+
+
+
+
+
+        try{
+
+
+            if(request.getParameter("page") != null){
+
+
+                page =
+                Integer.parseInt(
+                    request.getParameter("page")
+                );
+
+
+            }
+
+
+
+        }
+        catch(Exception e){
+
+
+            page = 1;
+
+
+        }
+
+
+
+
+
+
+
+
+        /*
+        ================================
+        GET DATA
+        ================================
+        */
 
 
 
@@ -247,8 +316,42 @@ case "status":
                 centreDAO.searchCentres(
                         search,
                         status,
-                        order
+                        order,
+                        page,
+                        pageSize
                 );
+
+
+
+
+
+
+
+        /*
+        ================================
+        TOTAL COUNT
+        ================================
+        */
+
+
+
+        int totalCentres =
+                centreDAO.countCentres(
+                        search,
+                        status
+                );
+
+
+
+
+        int totalPages =
+                (int)Math.ceil(
+                    (double)totalCentres
+                    /
+                    pageSize
+                );
+
+
 
 
 
@@ -259,6 +362,28 @@ case "status":
                 "centres",
                 centres
         );
+
+
+
+        request.setAttribute(
+                "currentPage",
+                page
+        );
+
+
+
+        request.setAttribute(
+                "pageSize",
+                pageSize
+        );
+
+
+
+        request.setAttribute(
+                "totalPages",
+                totalPages
+        );
+
 
 
 
@@ -285,25 +410,56 @@ case "status":
 
 
 
+        /*
+        ================================
+        AJAX REQUEST
+        ================================
+        */
 
- request.getRequestDispatcher(
-        "/admin/pages/centres.jsp"
-)
-.forward(
-        request,
-        response
-);
-    
+
+        if("true".equals(
+                request.getParameter("ajax")
+        )){
+
+
+            request.getRequestDispatcher(
+                "/admin/pages/fragments/centres/centres-table.jsp"
+            )
+            .forward(
+                request,
+                response
+            );
+
+
+            return;
+
+
+        }
+
+
+
+
+
+
+        request.getRequestDispatcher(
+                "/admin/pages/centres.jsp"
+        )
+        .forward(
+                request,
+                response
+        );
+
 
 
     }
-
-
-
-
-
-
-
+    
+//----- 2/2
+    
+    /*
+    ======================================================
+    ADD CENTRE
+    ======================================================
+    */
 
 
     private void addCentre(
@@ -311,8 +467,6 @@ case "status":
             HttpServletResponse response
     )
     throws ServletException, IOException {
-
-
 
 
 
@@ -353,9 +507,13 @@ case "status":
 
 
 
-        // ==========================
-        // GENERATE FIRST PASSWORD
-        // ==========================
+
+
+        /*
+        ======================================
+        GENERATE FIRST PASSWORD
+        ======================================
+        */
 
 
         String temporaryPassword =
@@ -366,8 +524,10 @@ case "status":
 
 
 
+
         Centre centre =
                 new Centre();
+
 
 
 
@@ -389,9 +549,14 @@ case "status":
 
 
 
-        // ==========================
-        // HASH PASSWORD
-        // ==========================
+
+
+
+        /*
+        ======================================
+        PASSWORD HASH
+        ======================================
+        */
 
 
         centre.setPasswordHash(
@@ -399,6 +564,8 @@ case "status":
                         temporaryPassword
                 )
         );
+
+
 
 
 
@@ -414,58 +581,72 @@ case "status":
 
 
 
-// ==========================
-// SUBSCRIPTION DURATION
-// ==========================
 
-int months = 1; // الافتراضي شهر واحد
+        /*
+        ======================================
+        SUBSCRIPTION DURATION
+        ======================================
+        */
 
 
-if("3".equals(duration)){
-
-    months = 3;
-
-}
+        int months = 1;
 
 
 
-if("6".equals(duration)){
+        if("3".equals(duration)){
 
-    months = 6;
+            months = 3;
 
-}
-
-
-
-if("12".equals(duration)){
-
-    months = 12;
-
-}
+        }
 
 
 
+        if("6".equals(duration)){
+
+            months = 6;
+
+        }
 
 
-LocalDate end =
-        LocalDate.parse(start)
-        .plusMonths(months);
+
+        if("12".equals(duration)){
+
+            months = 12;
+
+        }
 
 
 
 
 
-centre.setSubscriptionEnd(
-        Date.valueOf(end)
-);
+
+
+        LocalDate end =
+                LocalDate.parse(start)
+                .plusMonths(months);
 
 
 
 
 
-        // ==========================
-        // SAVE CENTRE
-        // ==========================
+
+
+        centre.setSubscriptionEnd(
+                Date.valueOf(end)
+        );
+
+
+
+
+
+
+
+
+        /*
+        ======================================
+        SAVE
+        ======================================
+        */
 
 
         boolean saved =
@@ -478,13 +659,9 @@ centre.setSubscriptionEnd(
 
 
 
+
         if(saved){
 
-
-
-            // ==========================
-            // SEND DATA TO SUCCESS PAGE
-            // ==========================
 
 
             request.setAttribute(
@@ -515,6 +692,8 @@ centre.setSubscriptionEnd(
 
 
 
+
+
             request.getRequestDispatcher(
                     "/admin/pages/fragments/centres/centre-created.jsp"
             )
@@ -525,9 +704,9 @@ centre.setSubscriptionEnd(
 
 
 
-
         }
         else{
+
 
 
             request.setAttribute(
@@ -551,9 +730,144 @@ centre.setSubscriptionEnd(
 
 
 
+    }
+
+
+
+
+
+
+
+
+
+    /*
+    ======================================================
+    UPDATE STATUS AJAX
+    ======================================================
+    */
+
+
+    private void updateStatus(
+            HttpServletRequest request,
+            HttpServletResponse response
+    )
+    throws IOException {
+
+
+
+        response.setContentType(
+                "application/json"
+        );
+
+
+        response.setCharacterEncoding(
+                "UTF-8"
+        );
+
+
+
+
+
+
+        try{
+
+
+
+            int id =
+                Integer.parseInt(
+                    request.getParameter("id")
+                );
+
+
+
+
+
+            String status =
+                    request.getParameter(
+                            "status"
+                    );
+
+
+
+
+
+
+
+            boolean updated =
+                    centreDAO.updateStatus(
+                            id,
+                            status
+                    );
+
+
+
+
+
+
+
+            if(updated){
+
+
+
+                response.getWriter()
+                .print(
+                    "{"
+                    + "\"success\":true,"
+                    + "\"status\":\""
+                    + status
+                    + "\""
+                    + "}"
+                );
+
+
+
+            }
+            else{
+
+
+
+                response.getWriter()
+                .print(
+                    "{"
+                    + "\"success\":false"
+                    + "}"
+                );
+
+
+            }
+
+
+
+
+        }
+        catch(Exception e){
+
+
+
+            e.printStackTrace();
+
+
+
+            response.getWriter()
+            .print(
+                "{"
+                + "\"success\":false,"
+                + "\"error\":\"server\""
+                + "}"
+            );
+
+
+
+        }
+
+
 
 
     }
+
+
+
+
 
 
 
@@ -562,86 +876,13 @@ centre.setSubscriptionEnd(
     @Override
     public String getServletInfo(){
 
+
         return "Centre Management Servlet";
 
-    }
-private void updateStatus(
-        HttpServletRequest request,
-        HttpServletResponse response
-)
-throws IOException {
-
-
-    response.setContentType("application/json");
-    response.setCharacterEncoding("UTF-8");
-
-
-
-    try{
-
-
-        int id = Integer.parseInt(
-                request.getParameter("id")
-        );
-
-
-
-        String status =
-                request.getParameter("status");
-
-
-
-        boolean updated =
-                centreDAO.updateStatus(
-                        id,
-                        status
-                );
-
-
-
-
-        if(updated){
-
-
-            response.getWriter().print(
-                "{"
-                + "\"success\":true,"
-                + "\"status\":\"" + status + "\""
-                + "}"
-            );
-
-
-        }
-        else{
-
-
-            response.getWriter().print(
-                "{"
-                + "\"success\":false"
-                + "}"
-            );
-
-
-        }
-
-
-
-    }
-    catch(Exception e){
-
-
-        e.printStackTrace();
-
-
-        response.getWriter().print(
-            "{"
-            + "\"success\":false,"
-            + "\"error\":\"server\""
-            + "}"
-        );
-
 
     }
 
 
-}}
+
+
+}

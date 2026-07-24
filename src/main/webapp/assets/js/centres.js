@@ -2,58 +2,45 @@
  * Centria
  * Centres Management JavaScript
  *
- * Search / Filter / Sort AJAX
+ * AJAX Search / Filter / Sort / Pagination
  */
 
 
+
 // =====================================
-// SEARCH CENTRES
+// LOAD CENTRES
 // =====================================
 
 
-function searchCentres(event){
-
-
-    if(event){
-
-        event.preventDefault();
-
-    }
+function loadCentres(page){
 
 
 
-    let form =
-    document.querySelector(
-        ".centres-filter-form"
-    );
+    if(!page){
 
-
-
-    if(!form){
-
-        return false;
+        page = 1;
 
     }
 
 
 
     let search =
-    form.querySelector(
-        "[name='search']"
+    document.getElementById(
+        "centreSearch"
     ).value;
 
 
 
     let status =
-    form.querySelector(
-        "[name='status']"
+    document.getElementById(
+        "centreStatus"
     ).value;
 
 
 
     let order =
-    form.querySelector(
-        "[name='order']"
+    document.getElementById(
+        "centreOrder"
     ).value;
 
 
@@ -66,6 +53,10 @@ function searchCentres(event){
         "/CentreServlet?action=list"
         +
         "&ajax=true"
+        +
+        "&page="
+        +
+        page
         +
         "&search="
         +
@@ -82,103 +73,132 @@ function searchCentres(event){
 
 
 
-    loadCentres(url);
-
-
-
-    return false;
-
-}
-
-
-
-
-
-
-
-// =====================================
-// LOAD CENTRES AJAX
-// =====================================
-
-
-function loadCentres(url){
 
 
 
     fetch(url)
 
 
-    .then(response => {
+
+    .then(
+        response => {
 
 
-        if(!response.ok){
+            if(!response.ok){
 
 
-            throw new Error(
-                "HTTP ERROR "
-                +
-                response.status
+                throw new Error(
+                    "HTTP ERROR "
+                    +
+                    response.status
+                );
+
+
+            }
+
+
+
+            return response.text();
+
+
+        }
+    )
+
+
+
+
+
+    .then(
+        html => {
+
+
+
+            let container =
+            document.getElementById(
+                "centres-table-container"
+            );
+
+
+
+
+            if(container){
+
+
+
+                container.innerHTML =
+                html;
+
+
+
+                activateCentreEvents();
+
+
+
+            }
+
+
+
+
+        }
+    )
+
+
+
+
+    .catch(
+        error => {
+
+
+            console.error(
+                "Centres AJAX Error:",
+                error
             );
 
 
         }
-
-
-
-        return response.text();
-
-
-
-    })
-
-
-
-    .then(data => {
-
-
-
-        let container =
-        document.getElementById(
-            "content-area"
-        );
-
-
-
-
-        if(container){
-
-
-            container.innerHTML =
-            data;
-
-
-
-            activateCentreEvents();
-
-
-
-        }
-
-
-
-    })
-
-
-
-    .catch(error => {
-
-
-        console.error(
-            "Centres AJAX Error:",
-            error
-        );
-
-
-    });
+    );
 
 
 
 }
+
+
+
+
+
+
+
+
+
+// =====================================
+// SEARCH BUTTON
+// =====================================
+
+
+function searchCentres(event){
+
+
+
+    if(event){
+
+
+        event.preventDefault();
+
+
+    }
+
+
+
+
+    loadCentres(1);
+
+
+
+    return false;
+
+
+}
+
 
 
 
@@ -195,10 +215,174 @@ function loadCentres(url){
 function filterCentres(){
 
 
-    searchCentres();
+
+    loadCentres(1);
+
 
 
 }
+
+
+
+
+
+
+
+
+
+// =====================================
+// CHANGE PAGE
+// =====================================
+
+
+function changeCentrePage(page){
+
+
+
+    loadCentres(page);
+
+
+
+}
+// =====================================
+// UPDATE CENTRE STATUS AJAX
+// =====================================
+
+
+function updateCentreStatus(select){
+
+
+
+    let id =
+    select.getAttribute(
+        "data-id"
+    );
+
+
+
+    let status =
+    select.value;
+
+
+
+
+
+    let url =
+        window.contextPath
+        +
+        "/CentreServlet?action=status"
+        +
+        "&id="
+        +
+        id
+        +
+        "&status="
+        +
+        encodeURIComponent(status);
+
+
+
+
+
+
+
+    fetch(url)
+
+
+
+    .then(
+        response =>
+        response.json()
+    )
+
+
+
+    .then(
+        data => {
+
+
+
+            if(data.success){
+
+
+
+                console.log(
+                    "Status updated:",
+                    data.status
+                );
+
+
+
+
+
+                // تغيير لون select مباشرة
+
+
+                select.classList.remove(
+                    "status-pending",
+                    "status-active",
+                    "status-suspended",
+                    "status-archived"
+                );
+
+
+
+
+
+                select.classList.add(
+                    "status-"
+                    +
+                    status.toLowerCase()
+                );
+
+
+
+
+
+            }
+            else{
+
+
+
+                alert(
+                    "Erreur modification statut"
+                );
+
+
+            }
+
+
+
+        }
+    )
+
+
+
+    .catch(
+        error => {
+
+
+
+            console.error(
+                "Status AJAX Error:",
+                error
+            );
+
+
+
+            alert(
+                "Erreur serveur"
+            );
+
+
+        }
+    );
+
+
+
+}
+
+
 
 
 
@@ -218,17 +402,21 @@ function activateCentreEvents(){
 
 
     let form =
-    document.querySelector(
-        ".centres-filter-form"
+    document.getElementById(
+        "centresFilterForm"
     );
+
+
 
 
 
     if(form){
 
 
+
         form.onsubmit =
         searchCentres;
+
 
 
     }
@@ -238,25 +426,51 @@ function activateCentreEvents(){
 
 
 
-    let selects =
-    document.querySelectorAll(
-        ".centres-filter-form select"
+
+    let status =
+    document.getElementById(
+        "centreStatus"
     );
 
 
 
+    if(status){
 
 
-    selects.forEach(
-        function(select){
+
+        status.onchange =
+        filterCentres;
 
 
-            select.onchange =
-            filterCentres;
+    }
 
 
-        }
+
+
+
+
+
+    let order =
+    document.getElementById(
+        "centreOrder"
     );
+
+
+
+    if(order){
+
+
+
+        order.onchange =
+        filterCentres;
+
+
+    }
+
+
+
+
+
 
 
 
@@ -268,107 +482,87 @@ function activateCentreEvents(){
 
 
 
+
+
 // =====================================
-// UPDATE CENTRE STATUS AJAX
+// LIVE SEARCH
 // =====================================
 
 
-
-function updateCentreStatus(select){
-
-    let id =
-        select.getAttribute("data-id");
-
-
-    let status =
-        select.value;
+let centreSearchTimer;
 
 
 
-let url =
-    window.contextPath
-    +
-    "/CentreServlet?action=status"
-    +
-    "&ajax=true"
-    +
-    "&id="
-    +
-    id
-    +
-    "&status="
-    +
-    status;
 
 
-    fetch(url)
+function activateSearch(){
 
 
 
-    .then(response => response.json())
+    let search =
+    document.getElementById(
+        "centreSearch"
+    );
 
 
 
-    .then(data => {
+    if(!search){
+
+
+        return;
+
+
+    }
 
 
 
-        if(data.success){
 
 
 
-            console.log(
-                "Status updated:",
-                data.status
-            );
+    search.oninput =
+    function(){
 
 
 
-            // إعادة تحميل المراكز من database
-            select.classList.remove(
-    "status-pending",
-    "status-active",
-    "status-suspended",
-    "status-archived"
-);
-
-
-select.classList.add(
-    "status-" + status.toLowerCase()
-);
-
-
-
-        }
-        else{
-
-
-            alert(
-                "Erreur modification statut"
-            );
-
-
-        }
-
-
-
-    })
-
-
-
-    .catch(error => {
-
-
-        console.error(
-            "Status AJAX Error:",
-            error
+        clearTimeout(
+            centreSearchTimer
         );
 
 
-    });
+
+
+
+        centreSearchTimer =
+        setTimeout(
+            function(){
+
+
+                loadCentres(1);
+
+
+
+            },
+            400
+        );
+
+
+
+    };
+
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
 
 // =====================================
 // INIT
@@ -380,7 +574,18 @@ document.addEventListener(
 function(){
 
 
+
     activateCentreEvents();
+
+
+
+    activateSearch();
+
+
+
+
+
+    loadCentres(1);
 
 
 

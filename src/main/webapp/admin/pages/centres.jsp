@@ -1,9 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@page import="com.centria.utils.LanguageManager"%>
-<%@page import="com.centria.models.Centre"%>
-<%@page import="java.util.List"%>
-<%@page import="java.text.SimpleDateFormat"%>
 
 
 
@@ -33,6 +30,8 @@
 
 
 
+
+
 <!-- =================================================
      TOOLBAR
      ================================================= -->
@@ -42,10 +41,11 @@
 
 
 
-<form method="get"
+<form id="centresFilterForm"
+      method="get"
       action="<%=request.getContextPath()%>/CentreServlet"
-      class="centres-filter-form"
-      onsubmit="searchCentres(event)">
+      class="centres-filter-form">
+
 
 
 <input type="hidden"
@@ -58,8 +58,9 @@
 
 
 
+
 <!-- ==========================
-     SEARCH
+     SEARCH LIVE
      ========================== -->
 
 
@@ -67,6 +68,7 @@
 
 
 <input type="text"
+       id="centreSearch"
        name="search"
        value="<%= request.getAttribute("search") != null 
                 ? request.getAttribute("search") 
@@ -75,6 +77,7 @@
                     "centers.search.placeholder",
                     session
        )%>">
+
 
 
 </div>
@@ -88,11 +91,12 @@
 
 
 <!-- ==========================
-     STATUS FILTER
+     STATUS
      ========================== -->
 
 
-<select name="status"
+<select id="centreStatus"
+        name="status"
         class="centre-select">
 
 
@@ -109,7 +113,6 @@
 
 
 
-
 <option value="PENDING">
 
 <%=LanguageManager.get(
@@ -118,7 +121,6 @@
 )%>
 
 </option>
-
 
 
 
@@ -135,7 +137,6 @@
 
 
 
-
 <option value="SUSPENDED">
 
 <%=LanguageManager.get(
@@ -148,7 +149,6 @@
 
 
 
-
 <option value="ARCHIVED">
 
 <%=LanguageManager.get(
@@ -157,7 +157,6 @@
 )%>
 
 </option>
-
 
 
 
@@ -176,7 +175,8 @@
      ========================== -->
 
 
-<select name="order"
+<select id="centreOrder"
+        name="order"
         class="centre-select">
 
 
@@ -216,7 +216,6 @@
 
 
 
-
 </select>
 
 
@@ -227,7 +226,8 @@
 
 
 
-<button type="submit"
+<button type="button"
+        onclick="loadCentres(1)"
         class="btn-primary">
 
 
@@ -248,6 +248,7 @@
 
 
 </form>
+
 
 
 
@@ -282,500 +283,31 @@
 
 </div>
 
+
+
+
+
+
+
+
+
 <!-- =================================================
-     TABLE CARD
+     TABLE CONTAINER
      ================================================= -->
 
 
-<div class="card">
+<div id="centres-table-container">
 
 
 
-<h3>
+<!--
+    هنا سيتم تحميل:
 
-<%=LanguageManager.get(
-        "centers.list.title",
-        session
-)%>
+    centres-table.jsp
 
-</h3>
+    بواسطة AJAX
 
-
-
-
-
-<%
-
-List<Centre> centres =
-(List<Centre>)request.getAttribute("centres");
-
-
-SimpleDateFormat sdf =
-new SimpleDateFormat("dd/MM/yyyy");
-
-
-// ==========================
-// PAGINATION DATA
-// ==========================
-
-int currentPage =
-request.getAttribute("currentPage") != null
-? (Integer)request.getAttribute("currentPage")
-: 1;
-
-
-int pageSize =
-request.getAttribute("pageSize") != null
-? (Integer)request.getAttribute("pageSize")
-: 10;
-
-
-
-if(centres == null || centres.isEmpty()){
-
-
-%>
-
-
-<p>
-
-<%=LanguageManager.get(
-        "centers.empty",
-        session
-)%>
-
-</p>
-
-
-<%
-
-}else{
-
-
-%>
-
-
-
-
-
-<div class="table-container">
-
-
-
-<table class="centers-table">
-
-
-
-<thead>
-
-
-<tr>
-
-
-<th>
-<%=LanguageManager.get("centers.id",session)%>
-</th>
-
-
-<th>
-<%=LanguageManager.get("centers.name",session)%>
-</th>
-
-
-<th>
-<%=LanguageManager.get("centers.owner",session)%>
-</th>
-
-
-<th>
-<%=LanguageManager.get("centers.phone",session)%>
-</th>
-
-
-<th>
-<%=LanguageManager.get("centers.subscription.start",session)%>
-</th>
-
-
-<th>
-<%=LanguageManager.get("centers.subscription.end",session)%>
-</th>
-
-
-<th>
-<%=LanguageManager.get("centers.status",session)%>
-</th>
-
-
-<th>
-<%=LanguageManager.get("centers.actions",session)%>
-</th>
-
-
-</tr>
-
-
-</thead>
-
-
-
-
-
-<tbody>
-
-
-
-
-
-<%
-
-for(Centre centre : centres){
-
-
-String status =
-centre.getStatus();
-
-
-
-String statusClass="status-pending";
-
-
-
-if("ACTIVE".equals(status)){
-
-    statusClass="status-active";
-
-}
-
-
-
-if("SUSPENDED".equals(status)){
-
-    statusClass="status-suspended";
-
-}
-
-
-
-if("ARCHIVED".equals(status)){
-
-    statusClass="status-archived";
-
-}
-
-
-
-
-
-
-%>
-
-
-
-
-
-
-<tr>
-
-
-
-
-<!-- ID -->
-
-<td>
-
-<%=centre.getId()%>
-
-</td>
-
-
-
-
-
-
-
-<!-- NAME -->
-
-<td>
-
-<strong>
-
-<%=centre.getName()%>
-
-</strong>
-
-</td>
-
-
-
-
-
-
-
-<!-- OWNER -->
-
-<td>
-
-<%=centre.getOwnerName()%>
-
-</td>
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- PHONE -->
-
-<td>
-
-<%=centre.getPhone()%>
-
-</td>
-
-
-
-
-
-
-
-<!-- START -->
-
-<td>
-
-
-<%
-
-if(centre.getSubscriptionStart()!=null){
-
-%>
-
-
-<%=sdf.format(
-        centre.getSubscriptionStart()
-)%>
-
-
-<%
-
-}else{
-
-%>
-
--
-
-<%
-
-}
-
-%>
-
-
-</td>
-
-
-
-
-
-
-
-<!-- END -->
-
-<td>
-
-
-<%
-
-if(centre.getSubscriptionEnd()!=null){
-
-%>
-
-
-<%=sdf.format(
-        centre.getSubscriptionEnd()
-)%>
-
-
-<%
-
-}else{
-
-%>
-
--
-
-<%
-
-}
-
-%>
-
-
-</td>
-
-
-
-
-
-
-<!-- STATUS -->
-
-<td>
-
-
-<select 
-    id="status_<%=centre.getId()%>"
-    class="status-select <%=statusClass%>"
-    data-id="<%=centre.getId()%>"
-    onchange="updateCentreStatus(this)">
-
-
-<option value="PENDING"
-<%= "PENDING".equals(status) ? "selected" : "" %>>
-<%=LanguageManager.get("centers.pending",session)%>
-</option>
-
-
-<option value="ACTIVE"
-<%= "ACTIVE".equals(status) ? "selected" : "" %>>
-<%=LanguageManager.get("centers.active",session)%>
-</option>
-
-
-<option value="SUSPENDED"
-<%= "SUSPENDED".equals(status) ? "selected" : "" %>>
-<%=LanguageManager.get("centers.suspended",session)%>
-</option>
-
-
-<option value="ARCHIVED"
-<%= "ARCHIVED".equals(status) ? "selected" : "" %>>
-<%=LanguageManager.get("centers.archived",session)%>
-</option>
-
-
-</select>
-
-
-</td>
-
-
-
-
-
-
-<!-- ACTIONS -->
-
-<td>
-
-
-<div class="actions">
-
-
-
-
-
-
-<!-- VIEW -->
-
-<a href="#"
-   class="action-btn action-view"
-   title="<%=LanguageManager.get("centers.view",session)%>">
-
-
-👁
-
-
-</a>
-
-
-
-
-
-
-
-<!-- EDIT -->
-
-<a href="#"
-   class="action-btn action-edit"
-   title="<%=LanguageManager.get("centers.edit",session)%>">
-
-
-✏️
-
-
-</a>
-
-
-
-
-
-
-
-<!-- RESET PASSWORD -->
-
-<a href="#"
-   class="action-btn action-renew"
-   title="<%=LanguageManager.get("centers.reset.password",session)%>">
-
-
-🔑
-
-
-</a>
-
-
-
-
-
-
-<!-- ==========================
-     CHANGE STATUS
-     ========================== -->
-
-
-
-
-
-
-</div>
-
-
-</td>
-
-
-
-
-
-
-
-</tr>
-
-
-
-
-
-<%
-
-}
-
-%>
-
-
-
-
-
-</tbody>
-
-
-
-</table>
+-->
 
 
 
@@ -785,14 +317,202 @@ if(centre.getSubscriptionEnd()!=null){
 
 
 
-<%
+
+
+
+
+<script>
+
+
+let searchTimer;
+
+
+
+document
+.getElementById("centreSearch")
+.addEventListener(
+"input",
+function(){
+
+
+    clearTimeout(searchTimer);
+
+
+
+    searchTimer =
+    setTimeout(
+        function(){
+
+            loadCentres(1);
+
+        },
+        400
+    );
+
+
+});
+
+
+
+
+
+
+
+document
+.getElementById("centreStatus")
+.addEventListener(
+"change",
+function(){
+
+    loadCentres(1);
+
+});
+
+
+
+
+
+
+
+document
+.getElementById("centreOrder")
+.addEventListener(
+"change",
+function(){
+
+    loadCentres(1);
+
+});
+
+
+
+
+
+
+
+function loadCentres(page){
+
+
+
+    let search =
+    document.getElementById(
+        "centreSearch"
+    ).value;
+
+
+
+    let status =
+    document.getElementById(
+        "centreStatus"
+    ).value;
+
+
+
+    let order =
+    document.getElementById(
+        "centreOrder"
+    ).value;
+
+
+
+
+
+
+    let url =
+    "<%=request.getContextPath()%>/CentreServlet"
+    +
+    "?action=list"
+    +
+    "&search="
+    + encodeURIComponent(search)
+    +
+    "&status="
+    + status
+    +
+    "&order="
+    + order
+    +
+    "&page="
+    + page
+    +
+    "&ajax=true";
+
+
+
+
+
+
+
+    fetch(url)
+
+    .then(
+        response =>
+        response.text()
+    )
+
+    .then(
+        html => {
+
+
+            document
+            .getElementById(
+                "centres-table-container"
+            )
+            .innerHTML = html;
+
+
+
+        }
+    )
+
+    .catch(
+        error => {
+
+            console.log(error);
+
+        }
+    );
+
+
+
+
 
 }
 
-%>
 
 
 
 
 
-</div>
+
+window.onload=function(){
+
+
+    loadCentres(1);
+
+
+};
+
+
+
+</script>
+
+<!-- =================================================
+     AJAX PAGINATION HANDLER
+     ================================================= -->
+
+
+<script>
+
+
+function changeCentrePage(page){
+
+
+    loadCentres(page);
+
+
+}
+
+
+
+</script>
