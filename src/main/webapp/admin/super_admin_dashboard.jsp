@@ -56,9 +56,9 @@ window.contextPath =
 
 
 
-
-<script src="<%=request.getContextPath()%>/assets/js/super_admin_dashboard.js"></script>
 <script src="<%=request.getContextPath()%>/assets/js/centres.js?v=2"></script>
+<script src="<%=request.getContextPath()%>/assets/js/super_admin_dashboard.js"></script>
+
 
 
 

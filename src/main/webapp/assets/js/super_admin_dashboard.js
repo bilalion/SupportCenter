@@ -90,17 +90,25 @@ function loadContent(page) {
 
 
 
-    .then(data => {
+ .then(data => {
+
+
+    document.getElementById(
+        "content-area"
+    ).innerHTML = data;
 
 
 
-        document.getElementById(
-            "content-area"
-        ).innerHTML = data;
+    // تشغيل تهيئة صفحة المراكز بعد تحميلها
+    if(typeof initCentresPage === "function"){
+
+        initCentresPage();
+
+    }
 
 
 
-    })
+})
 
 
 

@@ -482,18 +482,15 @@ function loadCentres(page){
 
 
 
+// تشغيل تحميل الجدول مباشرة بعد إدخال الصفحة
+setTimeout(
+    function(){
 
+        loadCentres(1);
 
-
-window.onload=function(){
-
-
-    loadCentres(1);
-
-
-};
-
-
+    },
+    100
+);
 
 </script>
 

@@ -560,7 +560,23 @@ function activateSearch(){
 
 
 
+// =====================================
+// AJAX PAGE INITIALIZATION
+// =====================================
 
+function initCentresPage(){
+
+
+    activateCentreEvents();
+
+
+    activateSearch();
+
+
+    loadCentres(1);
+
+
+}
 
 
 
